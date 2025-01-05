@@ -14,10 +14,11 @@ export default function NewGame({
 }) {
  
   const [lengthState, setLengthState] = useState(length.current);
+  const [validateState, setValidateState] = useState(checkWord.current);
 
   function handleChange(event) {
     if (event.target.type === "checkbox") {
-      checkWord.current = event.target.checked;
+      setValidateState(event.target.checked);
       return;
     }
 
@@ -30,6 +31,7 @@ export default function NewGame({
       return;
     }
 
+    checkWord.current = validateState;
     length.current = lengthState;
     reset();
   }
@@ -71,7 +73,7 @@ export default function NewGame({
           <input
             type="checkbox"
             name="difficulty"
-            value={checkWord.current}
+            checked={validateState}
             onChange={handleChange}
           />
         </form>
