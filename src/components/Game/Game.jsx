@@ -81,7 +81,7 @@ export default function Game() {
 
   useEffect(() => {
     // Focus the input field whenever the guess changes
-    if (inputRef.current) {
+    if (inputRef.current && !gameOver) {
       inputRef.current.focus();
     }
   }, [words]); 
