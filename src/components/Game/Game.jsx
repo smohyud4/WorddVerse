@@ -265,7 +265,7 @@ export default function Game() {
   return <>
     <p id="time">{formatTime()}</p>
     <main className="container">
-      {Array.from({ length: 6 }).map((_, index) => (
+      {Array.from({ length: length.current == 7 ? 5 : 6 }).map((_, index) => (
         <Row 
           key={index} 
           word={words[map[index]]} 
