@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import "./KeyBoard.css";
 
-export default function KeyBoard({
-  rowOne, 
-  rowTwo, 
-  rowThree, 
+const rowOne = "QWERTYUIOP";
+const rowTwo = "ASDFGHJKL";
+const rowThree = "ZXCVBNM";
+
+export default function KeyBoard({ 
   handleClick,
   handleEnter,
   handleDelete

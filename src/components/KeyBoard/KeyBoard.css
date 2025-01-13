@@ -87,8 +87,8 @@
     
     .keyBoardContainer .action {
         height: 30px;
-        width: 9vw;
-        min-width: 9vw;
+        width: 10vw;
+        min-width: 10vw;
         font-size: 66%;
     }
 }

@@ -1,12 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import KeyBoard from '../KeyBoard/KeyBoard';
 import NewGame from '../NewGame/NewGame';
+import Row from '../Row/Row';
 import './Game.css';
 
 const map = ['one', 'two', 'three', 'four', 'five', 'six'];
-const rowOne = "QWERTYUIOP";
-const rowTwo = "ASDFGHJKL";
-const rowThree = "ZXCVBNM";
 
 export default function Game() {
 
@@ -102,23 +100,6 @@ export default function Game() {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-  }
-
-  function getContainerWidth(length) {
-    if (window.innerWidth > 600) {
-      return {
-        width: `${(length/5)*50}%`
-      };
-    }
-
-    return {
-      width: `${(length/6)*80}%`
-    };
-  }
-  
-  function calculateSpanStyles(length) {
-    const spanWidth = `${100/length}%`;
-    return { width: spanWidth };
   }
 
   function generateWord(length) {
@@ -271,65 +252,27 @@ export default function Game() {
     }
   } 
 
+  /*function randomGuess() {
+    const word = generateWord(length.current).toUpperCase();
+    setWords((prevWords) => ({
+      ...prevWords,
+      [map[guess]]: word,
+    }));
+
+    setGuess(prev => prev+1);
+  }*/
+
   return <>
     <p id="time">{formatTime()}</p>
     <main className="container">
-      <div className="grid-item" style={getContainerWidth(length.current)}> 
-        {words.one.split('').map((char, index) => {
-          return (
-            <span id={`1${index}`} key={index} style={calculateSpanStyles(length.current)}>
-              {char}
-            </span> 
-          )
-        })}
-      </div>
-      <div className="grid-item" style={getContainerWidth(length.current)}>
-        {words.two.split('').map((char, index) => {
-          return (
-            <span id={`2${index}`} key={index} style={calculateSpanStyles(length.current)}>
-              {char}
-            </span> 
-          )
-        })} 
-      </div>
-      <div className="grid-item" style={getContainerWidth(length.current)}> 
-        {words.three.split('').map((char, index) => {
-          return (
-            <span id={`3${index}`} key={index} style={calculateSpanStyles(length.current)}>
-              {char}
-            </span> 
-          )
-        })}
-      </div>
-      <div className="grid-item" style={getContainerWidth(length.current)}>
-        {words.four.split('').map((char, index) => {
-          return (
-            <span id={`4${index}`} key={index} style={calculateSpanStyles(length.current)}>
-              {char}
-            </span> 
-          )
-        })} 
-      </div>
-      <div className="grid-item" style={getContainerWidth(length.current)}>
-        {words.five.split('').map((char, index) => {
-          return (
-            <span id={`5${index}`} key={index} style={calculateSpanStyles(length.current)}>
-              {char}
-            </span> 
-          )
-        })} 
-      </div>
-      {length.current != 7 &&
-        <div className="grid-item" style={getContainerWidth(length.current)}>
-          {words.six.split('').map((char, index) => {
-            return (
-              <span id={`6${index}`} key={index} style={calculateSpanStyles(length.current)}>
-                {char}
-              </span> 
-            )
-          })} 
-        </div>
-      }
+      {Array.from({ length: 6 }).map((_, index) => (
+        <Row 
+          key={index} 
+          word={words[map[index]]} 
+          guess={index+1}
+          length={length}
+        />
+      ))}
       <input
         ref={inputRef}
         id='guessInput' 
@@ -344,9 +287,6 @@ export default function Game() {
         }}
       />
       <KeyBoard 
-        rowOne={rowOne} 
-        rowTwo={rowTwo} 
-        rowThree={rowThree} 
         handleClick={handleClick}
         handleEnter={takeGuess}
         handleDelete={handleDelete}
@@ -363,4 +303,4 @@ export default function Game() {
       />
     )}
     </>
-}; 
+};
