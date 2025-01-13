@@ -895,7 +895,6 @@ plunder
 politic
 pollute
 popcorn
-poptart
 popular
 postage
 postbox
@@ -1041,13 +1040,10 @@ recline
 recover
 rectify
 recycle
-redbull
 redcoat
 redhead
 redline
 redneck
-redness
-redtail
 reducer
 redwood
 referee
