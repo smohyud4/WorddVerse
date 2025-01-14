@@ -31,6 +31,7 @@ export default function Game() {
   const [winnerMessage, setWinnerMessage] = useState("WorddVerse");
   const [time, setTime] = useState(0);
   const [colorModal, setColorModal] = useState(false);
+  const [currentIndex, setIndex] = useState(0);
 
   const checkWord = useRef(false);
   const length = useRef(5);
@@ -316,6 +317,8 @@ export default function Game() {
       <ColorModal 
         setDisplay={setColorModal} 
         setColors={setColorSet}
+        currentIndex={currentIndex}
+        setIndex={setIndex}
       />
     )}
     {gameOver && (

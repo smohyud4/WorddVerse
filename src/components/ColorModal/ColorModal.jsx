@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
 import './ColorModal.css';
 
 const colorSets = [
@@ -10,48 +9,47 @@ const colorSets = [
         correct: "#6aaa64"
     },
     {
-        blank: "#a19e9e", // Light Purple
-        wrongPosition: "#e94f37", // Amber
-        mixed: "linear-gradient(45deg, #e94f37, #393e41)", // Amber to Lime Green
-        correct: "#393e41", // Lime Green
+        blank: "#a19e9e", 
+        wrongPosition: "hsl(203, 6.60%, 23.90%)",
+        mixed: "linear-gradient(45deg,hsl(203, 6.60%, 23.90%),hsl(8, 80.20%, 56.50%) )", 
+        correct: "hsl(8, 80.20%, 56.50%)", 
     },
     {
-        blank: "#d2b48c", // Taupe
-        wrongPosition: "#83c5be", // Coral
-        mixed: "linear-gradient(45deg, #83c5be, #006d77)", // Coral to Olive
-        correct: "#006d77", // Olive
+        blank: "#d2b48c",
+        wrongPosition: "#83c5be", 
+        mixed: "linear-gradient(45deg, #83c5be, #006d77)",
+        correct: "#006d77",
     },
     {
-        blank: "#708090", // Slate Gray
-        wrongPosition: "#d496a7", // Gold
-        mixed: "linear-gradient(45deg, #d496a7, #5d576b)", // Gold to Emerald
-        correct: "#5d576b", // Emerald
+        blank: "#708090", 
+        wrongPosition: "hsl(51, 98%, 45.00%)",
+        mixed: "linear-gradient(45deg, hsl(51, 98%, 45.00%),hsl(283, 97.70%, 33.70%))", 
+        correct: "hsl(283, 97.70%, 33.70%)", 
     },
     {
-        blank: "#a19e9e", // Beige
-        wrongPosition: "#42bfdd", // Mustard
-        mixed: "linear-gradient(45deg, #42bfdd, #084b83)", // Mustard to Forest Green
-        correct: "#084b83", // Forest Green
+        blank: "#a19e9e", 
+        wrongPosition: "hsl(207, 88.50%, 27.30%)", 
+        mixed: "linear-gradient(45deg, hsl(207, 88.50%, 27.30%), hsl(192, 69.50%, 56.30%))", 
+        correct: "hsl(192, 69.50%, 56.30%)", 
     },
     {
-        blank: "#708090", // Light Blue
-        wrongPosition: "#8390fa", // Light Green
-        mixed: "linear-gradient(45deg, #8390fa, #1d2f6f)", // Light Green to Orange
-        correct: "#1d2f6f", // Orange
+        blank: "#a19e9e", 
+        wrongPosition: "hsl(178, 76.60%, 18.40%)", 
+        mixed: "linear-gradient(45deg, hsl(178, 76.60%, 18.40%), hsl(179, 100.00%, 33.10%))", 
+        correct: "hsl(179, 100.00%, 33.10%) ", 
     },
     {
-        blank: "#a19e9e", // Light Blue
-        wrongPosition: "#00a9a5", // Light Green
-        mixed: "linear-gradient(45deg, #00a9a5, #0b5351)", // Light Green to Orange
-        correct: "#0b5351", // Orange
-    },
+      blank: "#efc7c2", 
+      wrongPosition: "hsl(315, 97.00%, 25.90%)", 
+      mixed: "linear-gradient(45deg, hsl(315, 97.00%, 25.90%), hsl(333, 92.90%, 55.70%))", 
+      correct: "hsl(333, 92.90%, 55.70%)"
+    }
 ];
 
-export default function ColorModal({ setDisplay, setColors }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export default function ColorModal({setDisplay, setColors, currentIndex, setIndex}) {
 
   function nextSet() {
-    setCurrentIndex(prevIndex => {
+    setIndex(prevIndex => {
       const newIndex = (prevIndex+1) % colorSets.length;
       setColors(colorSets[newIndex]);
       return newIndex;
@@ -59,7 +57,7 @@ export default function ColorModal({ setDisplay, setColors }) {
   }
 
   function prevSet() {
-    setCurrentIndex(prevIndex => {
+    setIndex(prevIndex => {
       const newIndex = prevIndex === 0 ? colorSets.length - 1 : prevIndex - 1;
       setColors(colorSets[newIndex]);
       return newIndex;
@@ -81,10 +79,19 @@ export default function ColorModal({ setDisplay, setColors }) {
             <span style={{ backgroundColor: colorSets[currentIndex].correct }}>A</span>
             <span style={{ backgroundColor: colorSets[currentIndex].blank }}>Y</span>
           </div>
+          <div
+            className="colorSet-item"
+          >
+            <span style={{ backgroundColor: colorSets[currentIndex].wrongPosition }}>L</span>
+            <span style={{ backgroundColor: colorSets[currentIndex].correct }}>I</span>
+            <span style={{ backgroundColor: colorSets[currentIndex].blank}}>G</span>
+            <span style={{ backgroundColor: colorSets[currentIndex].blank }}>H</span>
+            <span style={{ backgroundColor: colorSets[currentIndex].blank }}>T</span>
+          </div>
         </div>
         <div className="carousel-controls">
-          <button onClick={prevSet}>&laquo; Previous</button>
-          <button onClick={nextSet}>Next &raquo;</button>
+          <button onClick={prevSet}>&laquo;</button>
+          <button onClick={nextSet}>&raquo;</button>
         </div>
         <button onClick={() => setDisplay(false)}>Close</button>
       </div>
