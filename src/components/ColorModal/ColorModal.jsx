@@ -40,9 +40,9 @@ const colorSets = [
     },
     {
       blank: "#efc7c2", 
-      wrongPosition: "hsl(315, 97.00%, 25.90%)", 
-      mixed: "linear-gradient(45deg, hsl(315, 97.00%, 25.90%), hsl(333, 92.90%, 55.70%))", 
-      correct: "hsl(333, 92.90%, 55.70%)"
+      wrongPosition: "hsl(333, 92.90%, 55.70%)", 
+      mixed: "linear-gradient(45deg, hsl(333, 92.90%, 55.70%), hsl(315, 97.00%, 25.90%))", 
+      correct: "hsl(315, 97.00%, 25.90%)"
     }
 ];
 
