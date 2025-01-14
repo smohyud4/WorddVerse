@@ -148,7 +148,6 @@ export default function Game() {
     const chars = document.querySelectorAll('.grid-item span');
     chars.forEach((span) => {
       span.className = '';
-      span.style.color = 'black';
     });
   }
 
@@ -193,8 +192,6 @@ export default function Game() {
         potential.push({char, i});
         winner = false;
       }
-
-      charTag.style.color = 'white';
     }
 
     for (const {char, i} of potential) {

@@ -56,21 +56,25 @@ span {
 
 .blank {
     background-color: var(--blank-color);
+    color: white;
     animation: pop 0.5s ease-in-out;
 }
 
 .wrong-position {
     background-color: var(--wrong-position-color);
+    color: white;
     animation: pop 0.5s ease-in-out;
 }
 
 .mixed {
     background: var(--mixed-color);
+    color: white;
     animation: pop 0.5s ease-in-out;
 }
 
 .correct {
     background-color: var(--correct-color);
+    color: white;
     animation: pop 0.5s ease-in-out;
 }
 
