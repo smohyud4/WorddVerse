@@ -51,14 +51,20 @@ export default function ColorModal({ setDisplay, setColors }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   function nextSet() {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % colorSets.length);
+    setCurrentIndex(prevIndex => {
+      const newIndex = (prevIndex+1) % colorSets.length;
+      setColors(colorSets[newIndex]);
+      return newIndex;
+    });
   }
 
   function prevSet() {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? colorSets.length - 1 : prevIndex - 1
-    );
-  };
+    setCurrentIndex(prevIndex => {
+      const newIndex = prevIndex === 0 ? colorSets.length - 1 : prevIndex - 1;
+      setColors(colorSets[newIndex]);
+      return newIndex;
+    });
+  }
 
   return (
     <div role="dialog" className="modal">
@@ -68,7 +74,6 @@ export default function ColorModal({ setDisplay, setColors }) {
         <div className="colorSet">
           <div
             className="colorSet-item"
-            onClick={() => setColors(colorSets[currentIndex])}
           >
             <span style={{ backgroundColor: colorSets[currentIndex].correct }}>R</span>
             <span style={{ backgroundColor: colorSets[currentIndex].blank }}>E</span>

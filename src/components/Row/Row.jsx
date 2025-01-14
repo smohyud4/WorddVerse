@@ -21,11 +21,11 @@ export default function Row({word, guess, length}) {
     
   return (
     <div className="grid-item" style={getContainerWidth(length.current)}>
-      {word.split('').map((char, index) => {
+      {Array.from({length: length.current}).map((_, index) => {
         const id = `${guess}${index}`;
         return (
           <span id={id} key={id} style={calculateSpanStyles(length.current)}>
-            {char}
+            {word[index] || ''}
           </span> 
         )
       })}

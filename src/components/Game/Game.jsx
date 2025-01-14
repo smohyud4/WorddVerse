@@ -2,14 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import KeyBoard from '../KeyBoard/KeyBoard';
 import NewGame from '../NewGame/NewGame';
 import Row from '../Row/Row';
+import Header from '../Header/Header'
+import ColorModal from '../ColorModal/ColorModal';
 import './Game.css';
 
 const map = ['one', 'two', 'three', 'four', 'five', 'six'];
 
 export default function Game() {
 
-  const [word, setWord] = useState('');
-  const [wordLists, setWordLists] = useState({});
   const [words, setWords] = useState({
     one: '',
     two: '',
@@ -18,10 +18,19 @@ export default function Game() {
     five: '',
     six: ''
   });
+  const [colorSet, setColorSet] = useState({
+    blank: "#a19e9e",
+    wrongPosition: "#c9b458",
+    mixed: "linear-gradient(45deg, #c9b458, #6aaa64)",
+    correct: "#6aaa64",
+  });
+  const [word, setWord] = useState('');
+  const [wordLists, setWordLists] = useState({});
   const [guess, setGuess] = useState(0);
   const [gameOver, setGameOver] = useState(true);
   const [winnerMessage, setWinnerMessage] = useState("WorddVerse");
   const [time, setTime] = useState(0);
+  const [colorModal, setColorModal] = useState(false);
 
   const checkWord = useRef(false);
   const length = useRef(5);
@@ -96,6 +105,13 @@ export default function Game() {
 
   }, [guess]);
 
+  useEffect(() => {
+    document.documentElement.style.setProperty("--blank-color", colorSet.blank);
+    document.documentElement.style.setProperty("--correct-color", colorSet.correct);
+    document.documentElement.style.setProperty("--wrong-position-color", colorSet.wrongPosition);
+    document.documentElement.style.setProperty("--mixed-color", colorSet.mixed);
+  }, [colorSet]);
+
   function formatTime() {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -127,6 +143,12 @@ export default function Game() {
     keys.forEach((key) => {
       if (key.className != 'action')
         key.className = '';
+    });
+
+    const chars = document.querySelectorAll('.grid-item span');
+    chars.forEach((span) => {
+      span.className = '';
+      span.style.color = 'black';
     });
   }
 
@@ -180,15 +202,15 @@ export default function Game() {
       const keyTag = document.getElementById(char.toUpperCase());
 
       if (freq[char] > 0) {
-        charTag.className = "correct-position";
-        charColors[i] = "correct-position";
+        charTag.className = "wrong-position";
+        charColors[i] = "wrong-position";
 
         if (exactMatches[char] > 0 && exactMatches[char] < freq[char]+1) {
           keyTag.classList.remove("correct");
           keyTag.classList.add("mixed");
         }
         else {
-          keyTag.classList.add("correct-position");
+          keyTag.classList.add("wrong-position");
         }
         freq[char]--;
       } 
@@ -215,7 +237,7 @@ export default function Game() {
 
   function handleDelete() {
     setWords((prevWords) => {
-      const newWords = { ...prevWords }; // Create a shallow copy of the state
+      const newWords = { ...prevWords }; 
       newWords[map[guess]] = newWords[map[guess]].slice(0, -1); // Remove the last character
       return newWords;
     });
@@ -263,6 +285,7 @@ export default function Game() {
   }*/
 
   return <>
+    <Header title="WorddVerse" setDisplay={setColorModal}/>
     <p id="time">{formatTime()}</p>
     <main className="container">
       {Array.from({ length: length.current == 7 ? 5 : 6 }).map((_, index) => (
@@ -292,6 +315,12 @@ export default function Game() {
         handleDelete={handleDelete}
       />
     </main>
+    {colorModal && (
+      <ColorModal 
+        setDisplay={setColorModal} 
+        setColors={setColorSet}
+      />
+    )}
     {gameOver && (
       <NewGame 
         message={winnerMessage} 

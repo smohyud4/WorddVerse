@@ -22,7 +22,6 @@
     align-items: center;
     justify-content: left;
     gap: 10px;
-    border: 1px solid #a8a6a6;
     padding: 10px; 
     height: 40px;
     font-weight: bold;
@@ -48,23 +47,30 @@ span {
     width: 266px;
 }
 
+:root {
+    --blank-color: #a19e9e;
+    --correct-color: #6aaa64;
+    --wrong-position-color: #c9b458;
+    --mixed-color: linear-gradient(45deg, #c9b458, #6aaa64);
+}
+
 .blank {
-    background-color: rgb(161, 158, 158);
+    background-color: var(--blank-color);
     animation: pop 0.5s ease-in-out;
 }
 
-.correct-position {
-    background-color: #c9b458;
+.wrong-position {
+    background-color: var(--wrong-position-color);
     animation: pop 0.5s ease-in-out;
 }
 
 .mixed {
-    background: linear-gradient(45deg, #c9b458, #6aaa64);
+    background: var(--mixed-color);
     animation: pop 0.5s ease-in-out;
 }
 
 .correct {
-    background-color: #6aaa64;
+    background-color: var(--correct-color);
     animation: pop 0.5s ease-in-out;
 }
 

@@ -4,7 +4,16 @@ header {
     justify-content: center;
     align-items: center;
     padding: 10px 10px;
+    font-size: 1.5rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
 }
 
 #title {
