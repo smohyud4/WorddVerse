@@ -34,6 +34,13 @@
 .modal-content .buttonContainer {
     display: flex;
     justify-content: center;
+    gap: 5px;
+}
+
+.buttonContainer button {
+    display: flex;
+    gap: 4px;
+    align-items: center;
 }
 
 .modal-content .colorGrid {

@@ -1,11 +1,18 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
+import { IoShareSocialOutline } from "react-icons/io5";
 import './NewGame.css'
 
 const wordLengths = [4, 5, 6, 7];
+const guessMap = {
+  'blank': '⬜', 
+  'wrong-position': '🟨', 
+  'correct': '🟩'
+};
 
 export default function NewGame({
   message, 
+  word,
   time, 
   colors,  
   length,
@@ -34,6 +41,40 @@ export default function NewGame({
     checkWord.current = validateState;
     length.current = lengthState;
     reset();
+  }
+
+  function generateResult(colors, time) {
+    const grid = colors.map(row => {
+      return row.map(color => guessMap[color]).join('');
+    }).join('\n');
+
+    return `WorddVerse ⏰ ${time}\n${grid}`;
+  }
+
+  function handleShare(challenge) {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const result = generateResult(colors, time);
+    let shareURL;
+    challenge 
+      ? shareURL = `${window.location.origin}?word=${btoa(word)}`
+      : shareURL = `${window.location.origin}`;
+
+    if (isMobile && navigator.share) {
+      navigator
+        .share({
+          title: `WorddVerse`,
+          text: result,
+          url: shareURL,
+        })
+        .then(() => console.log('Shared successfully'))
+        .catch(() => alert('Error sharing :('));
+    } 
+    else {
+      console.log(shareURL);
+      navigator.clipboard.writeText(`${result}\n${shareURL}`)
+        .then(() => alert('Results copied to clipboard!'))
+        .catch(() => alert('Failed to copy results.'));
+    }
   }
 
   return (
@@ -82,8 +123,19 @@ export default function NewGame({
           <button onClick={handleSubmit}>
             New Game
           </button>
+          {message != "WorddVerse" && (
+            <>
+              <button onClick={() => handleShare(true)}>
+                Challenge <IoShareSocialOutline/>
+              </button>
+              <button onClick={() => handleShare(false)}>
+                Share <IoShareSocialOutline/>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
   )
 }
+
