@@ -48,16 +48,22 @@ export default function NewGame({
       return row.map(color => guessMap[color]).join('');
     }).join('\n');
 
-    return `WorddVerse ⏰ ${time}\n${grid}`;
+    return `WorddVerse \n⏰ ${time}\n${grid}`;
   }
 
   function handleShare(challenge) {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const result = generateResult(colors, time);
+    let result = generateResult(colors, time);
     let shareURL;
-    challenge 
-      ? shareURL = `${window.location.origin}?word=${btoa(word)}`
-      : shareURL = `${window.location.origin}`;
+    if (challenge) {
+      shareURL = `${window.location.origin}?word=${btoa(word)}`;
+      result += '\nBeat that!';
+    }
+    else {
+      shareURL = `${window.location.origin}`;
+      result += `\n${word}`;
+    }
+
 
     if (isMobile && navigator.share) {
       navigator
