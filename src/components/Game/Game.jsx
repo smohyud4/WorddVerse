@@ -8,6 +8,23 @@ import './Game.css';
 
 const map = ['one', 'two', 'three', 'four', 'five', 'six'];
 
+function validateLink(params) {
+  if (!params.has('word') || !params.has('id') || !params.has('expiry'))
+    return false;
+
+  // Validate expiry timestamp
+  const expiryTimestamp = Number(params.get('expiry')); 
+  const now = Math.floor(Date.now() / 1000 / 3600);
+
+  if (isNaN(expiryTimestamp) || now > expiryTimestamp) {
+    alert('This link has expired.');
+    window.location.href = window.location.origin; 
+    return false;
+  }
+
+  return true;
+}
+
 export default function Game() {
   
   const [words, setWords] = useState({
@@ -73,7 +90,7 @@ export default function Game() {
     
     const urlParams = new URLSearchParams(window.location.search);
 
-    if (urlParams.has('word')) {
+    if (validateLink(urlParams)) {
       const word = atob(urlParams.get('word'));
       if (word.length >= 4 && word.length <= 7) {
         setWord(word);
@@ -83,6 +100,8 @@ export default function Game() {
       id.current = urlParams.get('id');
 
       urlParams.delete('word');
+      urlParams.delete('id');
+      urlParams.delete('expiry');
       const newUrl = `${window.location.origin}${window.location.pathname}`;
       window.history.replaceState({}, '', newUrl);
     }

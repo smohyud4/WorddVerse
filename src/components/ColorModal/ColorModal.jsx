@@ -33,10 +33,10 @@ const colorSets = [
         correct: "hsl(192, 69.50%, 56.30%)", 
     },
     {
-        blank: "#a19e9e", 
-        wrongPosition: "hsl(178, 76.60%, 18.40%)", 
-        mixed: "linear-gradient(45deg, hsl(178, 76.60%, 18.40%), hsl(179, 100.00%, 33.10%))", 
-        correct: "hsl(179, 100.00%, 33.10%) ", 
+        blank: "#a19e9e",
+        wrongPosition: "hsl(25, 45.10%, 53.70%)",
+        mixed: "linear-gradient(45deg,hsl(25, 45.10%, 53.70%),hsl(210, 55.20%, 55.90%))",
+        correct: "hsl(210, 55.20%, 55.90%)"
     },
     {
       blank: "#efc7c2", 

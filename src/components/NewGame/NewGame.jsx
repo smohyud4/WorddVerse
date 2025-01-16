@@ -58,7 +58,9 @@ export default function NewGame({
     let shareURL;
     if (challenge) {
       const id = Math.floor(Math.random()*10000) + 1;
-      shareURL = `${window.location.origin}?word=${btoa(word)}&id=${id}`;
+      // Expire after 2 days (hours)
+      const expiryTimestamp =  Math.floor(Date.now() / 1000 / 3600) + 48;
+      shareURL = `${window.location.origin}?word=${btoa(word)}&id=${id}&expiry=${expiryTimestamp}`;
       result += `\nBeat that!\n#Game ID: ${id}`;
     }
     else {
