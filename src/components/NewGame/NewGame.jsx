@@ -16,7 +16,8 @@ export default function NewGame({
   time, 
   colors,  
   length,
-  checkWord, 
+  checkWord,
+  gameId, 
   reset
 }) {
  
@@ -56,14 +57,14 @@ export default function NewGame({
     let result = generateResult(colors, time);
     let shareURL;
     if (challenge) {
-      shareURL = `${window.location.origin}?word=${btoa(word)}`;
-      result += '\nBeat that!';
+      const id = Math.floor(Math.random()*10000) + 1;
+      shareURL = `${window.location.origin}?word=${btoa(word)}&id=${id}`;
+      result += `\nBeat that!\n#Game ID: ${id}`;
     }
     else {
       shareURL = `${window.location.origin}`;
-      result += `\n${word}`;
+      result += `\n${word}\n#Game ID: ${gameId}`;
     }
-
 
     if (isMobile && navigator.share) {
       navigator
@@ -129,16 +130,17 @@ export default function NewGame({
           <button onClick={handleSubmit}>
             New Game
           </button>
-          {message != "WorddVerse" && (
-            <>
-              <button onClick={() => handleShare(true)}>
+          {message != "WorddVerse" && 
+            (!gameId ? (
+              <button className="shareButton" onClick={() => handleShare(true)}>
                 Challenge <IoShareSocialOutline/>
               </button>
-              <button onClick={() => handleShare(false)}>
+            ) : (
+              <button className="shareButton" onClick={() => handleShare(false)}>
                 Share <IoShareSocialOutline/>
               </button>
-            </>
-          )}
+            ))
+          }
         </div>
       </div>
     </div>

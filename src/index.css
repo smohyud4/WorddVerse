@@ -13,21 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 } 
-
 
 button {
   border-radius: 8px;
@@ -53,10 +43,9 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
-  a:hover {
-    color: #747bff;
-  }
+
   button {
+    color: black;
     background-color: #f9f9f9;
   }
 
@@ -67,13 +56,12 @@ button:focus-visible {
 
 @media (prefers-color-scheme: dark) {
 
-  .keyBoardContainer button {
+  button {
     color: white !important;
   }
 
   .modal-content {
       background-color: #333 !important; /* Modal background for dark mode */
-
   }
 }
 
