@@ -243,7 +243,6 @@ circuit
 classes
 classic
 cleaner
-clinton
 closely
 clothes
 cockpit

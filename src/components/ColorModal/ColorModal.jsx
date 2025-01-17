@@ -68,7 +68,7 @@ export default function ColorModal({setDisplay, setColors, currentIndex, setInde
     <div role="dialog" className="modal">
       <div className="modal-content">
         <h1>Choose a Color Set</h1>
-        <h4>Rival</h4>
+        <h3>Rival</h3>
         <div className="colorSet">
           <div
             className="colorSet-item"
