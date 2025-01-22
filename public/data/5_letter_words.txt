@@ -2302,7 +2302,6 @@ write
 wrong
 wrote
 wrung
-wryly
 yacht
 yearn
 yeast

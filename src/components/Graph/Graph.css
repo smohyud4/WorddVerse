@@ -1,0 +1,77 @@
+.time-stats {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.time-stats .time-bar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.time-stats .stat {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.time-stats .time-icon {
+    font-size: 20px;
+}
+
+.frequency-graph {
+    display: flex; /* To lay out the bars horizontally */
+    align-items: flex-start; /* Align bars at the bottom */
+    flex-direction: column;
+    gap: 8px; /* Space between bars */
+    width: 85%;
+    height: fit-content;
+    padding: 10px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.bar-container {
+    display: flex;
+    width: 100%;
+    gap: 5px;
+}
+
+.bar {
+    display: flex; /* Allows centering the text inside the bar */
+    flex-direction: column-reverse; /* Position text at the bottom */
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #3498db; /* Blue bars */
+    color: white; /* Text color inside the bars */
+    width: 40px; /* Fixed width for bars */
+    border-radius: 4px;
+    transition: transform 0.2s; /* Add hover effect */
+}
+
+.bar:hover {  /* Slightly enlarge bar on hover */
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+.bar p {
+    margin: 0;
+    padding: 4px;
+    font-size: 12px; /* Adjust text size */
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .frequency-graph {
+        width: 100%;
+    }
+}
+
+@media (max-width: 360px) {
+    .time-stats {
+        flex-wrap: wrap;
+    }
+}
+
+
+  

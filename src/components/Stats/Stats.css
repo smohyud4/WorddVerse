@@ -1,0 +1,36 @@
+.stat-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3vh;
+    gap: 10vw;
+}
+
+.stat-controls button {
+    height: fit-content;
+}
+
+.stat-controls span {
+    text-decoration: underline;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 5vh;
+}
+
+.stats-container .game-stats {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    max-width: 900px;
+    gap: 3px;
+}
+
+.stats-container .game-stats h2, .stats-container .game-stats p {
+    margin: 0;
+}

@@ -90,8 +90,8 @@ export default function ColorModal({setDisplay, setColors, currentIndex, setInde
           </div>
         </div>
         <div className="carousel-controls">
-          <button onClick={prevSet}>&laquo;</button>
-          <button onClick={nextSet}>&raquo;</button>
+          <button onClick={() => prevSet()}>&laquo;</button>
+          <button onClick={() => nextSet()}>&raquo;</button>
         </div>
         <button onClick={() => setDisplay(false)}>Close</button>
       </div>

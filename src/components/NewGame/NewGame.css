@@ -20,8 +20,22 @@
     max-width: max-content;
 }
 
-.modal-content > h1, .modal-content > h2 {
+.modal-content > h1 {
     text-align: center;
+    margin-bottom: 0;
+}
+
+.modal-content .results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-content .results a {
+    display: flex;
+    align-items: center;
+    color: black;
 }
 
 .modal-content .inputContainer {

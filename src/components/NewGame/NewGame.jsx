@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
 import { IoShareSocialOutline } from "react-icons/io5";
+import { IoIosStats } from "react-icons/io";
 import './NewGame.css'
 
 const wordLengths = [4, 5, 6, 7];
@@ -102,7 +103,10 @@ export default function NewGame({
         <h1>{message || "Game over"}</h1>
         {message != "WorddVerse" &&
           <>
-            <h2>Time: {time}</h2>
+            <div className="results">
+              <h2>Time: {time}</h2>
+              <h2><a href='/stats'><IoIosStats/></a></h2>
+            </div>
             <div 
               className="colorGrid" 
               style={{
