@@ -86,4 +86,16 @@
     .modal-content .inputContainer label {
         font-size: 0.8rem; /* Smaller font size for compact display */
     }
+
+    .modal-content .buttonContainer {
+        font-size: 0.8rem;
+    }
+
+    .modal-content > h1 {
+        font-size: 1.5rem;
+    }
+    
+    .modal-content > h2 {
+        font-size: 1.2rem;
+    }
 }
