@@ -106,10 +106,10 @@
     }
 
     .modal-content > h1 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
     
-    .modal-content > h2 {
-        font-size: 1.2rem;
+    .modal-content .results > h2 {
+        font-size: 1.3rem;
     }
 }
