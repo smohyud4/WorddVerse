@@ -100,7 +100,7 @@ export default function NewGame({
   return (
     <div role="dialog" className="modal">
       <div className="modal-content">
-        <h1>{message || "Game over"}</h1>
+        <h1 id="msg">{message || "Game over"}</h1>
         {message != "WorddVerse" &&
           <>
             <div className="results">

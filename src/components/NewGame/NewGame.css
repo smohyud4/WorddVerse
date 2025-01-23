@@ -20,8 +20,8 @@
     max-width: max-content;
 }
 
-.modal-content > h1 {
-    text-align: center;
+#msg {
+    margin-bottom: 0;
 }
 
 .modal-content .results {
