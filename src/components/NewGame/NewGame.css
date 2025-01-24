@@ -16,8 +16,8 @@
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 60%;
-    max-width: max-content;
+    width: 80%;
+    max-width: 450px;
 }
 
 #msg {
@@ -80,20 +80,20 @@
 
 @media (min-width: 470px) and (max-width: 600px) {
 
-    .modal-content {
-        width: 80%;
-    }
-
     .modal-content .inputContainer label {
         font-size: 0.9rem; /* Slightly smaller font size for compact display */
     }
-
 }
 
 @media (max-width: 470px) {
 
+    .modal {
+        padding-top: 8vh;
+    }
+
     .modal-content {
         width: 90%;
+        max-width: 320px;
     }
 
     .modal-content .inputContainer label {
