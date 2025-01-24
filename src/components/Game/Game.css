@@ -88,3 +88,15 @@
     }
 }
 
+@media (max-width: 350px) {
+    .grid-item {
+        height: 35px;
+        padding: 5px;
+    }
+
+    .grid-item span {
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
