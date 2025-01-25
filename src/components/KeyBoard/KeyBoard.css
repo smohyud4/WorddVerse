@@ -47,7 +47,11 @@
     min-width: 80px;
 }
 
-@media (min-width: 350px) and (max-width: 600px) {
+@media (max-width: 600px) {
+
+    .keyBoardContainer {
+        overflow-x: hidden;
+    }
 
     #rowTwo  {
         justify-content: unset;
@@ -61,6 +65,7 @@
         width: 9%;
         min-width: 9%;
         font-size: 3vw;
+        border-radius: 8px;
         margin: 0;
     }
     
@@ -69,24 +74,28 @@
         width: 12%;
         min-width: 12%;
         font-size: 3vw;
+        border-radius: 8px;
     }
 }
  
 
 @media (max-width: 350px) {
 
+    #rowTwo  {
+        gap: 2%;
+    }
+     
     .keyBoardContainer div button {
         height: 30px;
-        width: 5vw;
-        min-width: 5vw;
-        font-size: 66%; 
-        margin: 0;
+        width: 8%;
+        min-width: 8%;
+        border-radius: 5px;
     }
-    
+
     .keyBoardContainer .action {
         height: 30px;
-        width: 10vw;
-        min-width: 10vw;
-        font-size: 66%;
+        width: 11%;
+        min-width: 11%;
+        border-radius: 5px;
     }
 }
