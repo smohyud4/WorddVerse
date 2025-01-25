@@ -49,6 +49,13 @@
 
 @media (min-width: 350px) and (max-width: 600px) {
 
+    #rowTwo  {
+        justify-content: unset;
+        width: 98%;
+        gap: 1%;
+        margin-left: 9%;
+    }
+
     .keyBoardContainer div button {
         height: 5.5vh;
         width: 9%;
