@@ -50,7 +50,7 @@
 @media (min-width: 350px) and (max-width: 600px) {
 
     .keyBoardContainer div button {
-        height: 6vh;
+        height: 5.5vh;
         width: 9%;
         min-width: 9%;
         font-size: 3vw;
@@ -58,7 +58,7 @@
     }
     
     .keyBoardContainer .action {
-        height: 6vh;
+        height: 5.5vh;
         width: 12%;
         min-width: 12%;
         font-size: 3vw;
