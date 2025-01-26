@@ -20,9 +20,16 @@ export default function Graph({stats, length}) {
 
   return <>
     <h2>
-      Length: {length} Win%: {((stats.wins / stats.games) * 100).toFixed(0)} 
+      Games: {stats.games} Win%: {((stats.wins / stats.games) * 100).toFixed(0)} 
     </h2>
-    <p>Guess Frequency</p>
+    <span className="length-container">
+      {Array.from({length: length}).map((_, index) => {
+        return <span key={index}></span>
+      })}
+    </span>
+    <p>
+      Guess Frequency
+    </p>
     <div className="frequency-graph">
       {stats.guessFrequency.map((freq, index) => {
         if (index === 5 && length === 7) return null;

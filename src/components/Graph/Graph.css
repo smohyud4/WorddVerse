@@ -61,6 +61,18 @@
     text-align: center;
 }
 
+.length-container {
+    display: flex; /* Align the squares in a row */
+    justify-content: center;
+    gap: 8px; /* Add spacing between squares */
+}
+
+.length-container span {
+    width: 40px; /* Width of each square */
+    height: 40px; /* Height of each square */
+    border: 1px solid  #2980b9;
+}
+
 @media (max-width: 600px) {
     .frequency-graph {
         width: 100%;
@@ -68,6 +80,15 @@
 }
 
 @media (max-width: 360px) {
+
+    .length-container span {
+        width: 20px; 
+        height: 20px; 
+    }
+    
+    .game-stats h2 {
+        font-size: 1.2rem;
+    }
     .time-stats {
         flex-wrap: wrap;
     }
