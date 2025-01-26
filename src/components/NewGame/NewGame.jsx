@@ -35,6 +35,16 @@ export default function NewGame({
   const [lengthState, setLengthState] = useState(length.current);
   const [validateState, setValidateState] = useState(checkWord.current);
 
+  function getModalAnimation(message) {
+    if (message === "WorddVerse") {
+      return;
+    }
+
+    return message[message.length-1] == '!'
+      ? {animation: 'grow 0.4s ease-in'}
+      : {animation: 'fade 1s ease-in'}
+  }
+
   function handleChange(event) {
     if (event.target.type === "checkbox") {
       setValidateState(event.target.checked);
@@ -99,7 +109,10 @@ export default function NewGame({
 
   return (
     <div role="dialog" className="modal">
-      <div className="modal-content">
+      <div 
+        className="modal-content"
+        style={getModalAnimation(message)}
+      >
         <h1 id="msg">{message || "Game over"}</h1>
         {message != "WorddVerse" &&
           <>
@@ -111,8 +124,7 @@ export default function NewGame({
               className="colorGrid" 
               style={{
                 gridTemplateRows: `repeat(${colors.length}, 1fr)`, 
-                gridTemplateColumns: `repeat(${length.current}, 1fr)`,
-                width: `${length.current*20 + (length.current-1)*2}px`,  
+                gridTemplateColumns: `repeat(${length.current}, 1fr)`  
               }}
             >
               {colors.flat().map((color, index) => (

@@ -64,7 +64,7 @@
         height:  max(5.5vh, 31px);
         width: 9%;
         min-width: 9%;
-        font-size: 3vw;
+        font-size: 3.5vw;
         border-radius: 8px;
         margin: 0;
     }
@@ -73,7 +73,7 @@
         height: max(5.5vh, 31px);
         width: 12%;
         min-width: 12%;
-        font-size: 3vw;
+        font-size: 3.5vw;
         border-radius: 8px;
     }
 }

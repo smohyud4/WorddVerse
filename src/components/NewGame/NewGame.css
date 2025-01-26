@@ -17,7 +17,17 @@
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 450px;
+    max-width: 450px;    
+}
+
+@keyframes grow {
+    from {transform: scale(0);}
+    to {transform: scale(1);}
+}
+
+@keyframes fade {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 #msg {
@@ -63,6 +73,7 @@
 
 .modal-content .colorGrid {
     display: grid;   
+    width: fit-content;
     gap: 2px; 
     margin: 0 auto;
 }
@@ -78,12 +89,6 @@
     width: 10%;
 }
 
-@media (min-width: 470px) and (max-width: 600px) {
-
-    .modal-content .inputContainer label {
-        font-size: 0.9rem; /* Slightly smaller font size for compact display */
-    }
-}
 
 @media (max-width: 470px) {
 
@@ -101,7 +106,7 @@
     }
 
     .modal-content .buttonContainer {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
     .modal-content > h1 {
@@ -110,5 +115,28 @@
     
     .modal-content .results > h2 {
         font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .colorGrid > div {
+        width: 15px; 
+        height: 15px;
+    }
+
+    .modal-content .inputContainer label {
+        font-size: 0.7rem; 
+    }
+
+    .modal-content > h1 {
+        font-size: 1.4rem;
+    }
+    
+    .modal-content .results > h2 {
+        font-size: 1.1rem;
+    }
+
+    .modal-content .buttonContainer {
+        font-size: 0.8rem;
     }
 }
