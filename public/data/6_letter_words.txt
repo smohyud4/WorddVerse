@@ -1062,7 +1062,6 @@ untidy
 greens
 cravat
 heater
-sonata
 alcove
 influx
 badger
@@ -1155,12 +1154,9 @@ hobbit
 seemly
 prefix
 cougar
-swanky
 stormy
 closet
 strife
-loquat
-mouton
 saloon
 gadget
 kimono
@@ -1357,8 +1353,6 @@ slider
 shanty
 schema
 zombie
-ephyra
-dahlia
 ascent
 leaver
 diaper
@@ -1432,7 +1426,6 @@ pinots
 avoids
 juices
 commas
-mambos
 globes
 reigns
 locals
@@ -1454,16 +1447,13 @@ spices
 snores
 petals
 salons
-sheeps
 flours
-wrings
 others
 attics
 chicks
 joints
 adapts
 capers
-adobes
 choirs
 kiosks
 shades
@@ -1482,7 +1472,6 @@ spears
 probes
 fights
 steers
-snucks
 apples
 carves
 arenas
@@ -1503,7 +1492,6 @@ rhymes
 pleads
 banjos
 larges
-bloods
 olives
 pliers
 pleats
@@ -1523,7 +1511,6 @@ clicks
 cellos
 diners
 beings
-twines
 brooms
 skunks
 squids
@@ -1556,11 +1543,9 @@ dwarfs
 steaks
 guilts
 screws
-graces
 spawns
 cheeks
 wheats
-fibres
 elbows
 humans
 curves
