@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-top: 5px;
     gap: min(0.8vh, 5px);
 }
 
@@ -37,7 +38,10 @@
 }
 
 #rowTwo {
-    width: 95%;
+    justify-content: unset;
+    width: 98%;
+    gap: 1.4%;
+    margin-left: 9%;
 }
 #rowThree {
     width: 98%;
@@ -51,13 +55,11 @@
 
     .keyBoardContainer {
         overflow-x: hidden;
+        margin-top: 0;
     }
 
     #rowTwo  {
-        justify-content: unset;
-        width: 98%;
         gap: 1%;
-        margin-left: 9%;
     }
 
     .keyBoardContainer div button {
