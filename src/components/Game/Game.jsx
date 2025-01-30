@@ -87,6 +87,8 @@ export default function Game() {
         6: sixLetterWords,
         7: sevenLetterWords,
       });
+
+      // console.log(fourLetterWords.length, fiveLetterWords.length, sixLetterWords.length, sevenLetterWords.length);
     }
     
     const urlParams = new URLSearchParams(window.location.search);
@@ -144,17 +146,19 @@ export default function Game() {
     if (inputRef.current && !gameOver) {
       inputRef.current.focus();
     }
-  }, [words]); 
+  }, [word, gameOver]); 
 
   useEffect(() => { 
     if (guess != 0 && checkGuess()) {
       setGameOver(true);
+      inputRef.current.blur();
       setWinnerMessage(`You guessed ${word}!`);
       const stats = loadStats();
       updateStats(stats, guess, time, length.current, true);
     }
     else if ((guess == 5 && length.current == 7) || guess == 6) {
       setGameOver(true);
+      inputRef.current.blur();
       setWinnerMessage(`The word was ${word}.`);
       const stats = loadStats();
       updateStats(stats, guess, time, length.current, false);
@@ -300,17 +304,13 @@ export default function Game() {
 
   function handleInput(event) {
     const {name, value} = event.target;
-    const char = value.charCodeAt(value.length-1)
-
-    if ((char < '65' || char > '90') && // A-Z
-       (char < '97' || char > '122')) {
-      return;
+    
+    if (value === '' || /^[a-z]+$/i.test(value)) {
+      setWords((prevGuess) => ({
+        ...prevGuess,
+        [name]: value.toUpperCase()
+      }));
     }
-
-    setWords((prevWords) => ({
-      ...prevWords,
-      [name]: value.toUpperCase(),
-    }));
   }
 
   function takeGuess() {
