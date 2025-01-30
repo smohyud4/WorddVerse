@@ -1127,12 +1127,8 @@ shooter
 shorter
 sidearm
 sincere
-sitdown
 sixteen
-skijump
 skimask
-skipole
-skypark
 slavery
 smarter
 smuggle
@@ -1787,7 +1783,6 @@ seconds
 dancers
 stripes
 bumpers
-thrifts
 notices
 lizards
 orchids

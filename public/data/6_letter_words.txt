@@ -1325,7 +1325,6 @@ consul
 muddle
 squeal
 dapper
-arthur
 cupola
 clutch
 brooch
@@ -1387,7 +1386,6 @@ stands
 ankles
 breads
 shines
-roughs
 violas
 riders
 pagans
@@ -1491,7 +1489,6 @@ finals
 rhymes
 pleads
 banjos
-larges
 olives
 pliers
 pleats
@@ -1528,7 +1525,6 @@ stalls
 beasts
 equals
 scares
-swines
 worlds
 demons
 offers
@@ -1565,10 +1561,8 @@ thumps
 rivers
 stings
 chains
-sonars
 plants
 meters
-steels
 crowds
 sieges
 scarfs

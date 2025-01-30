@@ -30,14 +30,16 @@ export default function Stats() {
 
   return <> 
     <Header title="WorddVerse" setDisplay={() => {}}/>
-    <div className="stats-container">
-      <div className="game-stats">
-        <Graph stats={stats[index]} length={index+4}/>
-      </div>
-    </div>
-    <div className="stat-controls">
-      <button onClick={() => changeLength(false)}>&laquo;</button>
-      <button onClick={() => changeLength(true)}>&raquo;</button>
-    </div>
+    <main>
+      <section className="stats-container">
+        <div className="game-stats">
+          <Graph stats={stats[index]} length={index+4}/>
+        </div>
+      </section>
+      <section className="stat-controls">
+        <button onClick={() => changeLength(false)}>&laquo;</button>
+        <button onClick={() => changeLength(true)}>&raquo;</button>
+      </section>
+    </main>
   </>
 }

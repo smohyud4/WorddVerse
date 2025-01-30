@@ -12,7 +12,7 @@ export default function KeyBoard({
 }) {
 
   return <>
-    <div className="keyBoardContainer">
+    <section className="keyBoardContainer">
       <div id="rowOne">
         {rowOne.split('').map((char, index)=> {
           return (
@@ -58,6 +58,6 @@ export default function KeyBoard({
           Del
         </button>
        </div>
-    </div>
+    </section>
   </>;
 }
