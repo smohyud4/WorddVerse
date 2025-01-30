@@ -1,5 +1,4 @@
 .keyBoardContainer {
-    border-radius: 20px;
     height: auto; /* Allow the height to adjust based on content */
     width: 100%; /* Use a larger percentage to make it more responsive */
     max-width: 1000px; /* Cap the maximum width */
@@ -67,7 +66,7 @@
         width: 9%;
         min-width: 9%;
         font-size: 3.5vw;
-        border-radius: 8px;
+        border-radius: 6px;
         margin: 0;
     }
     
@@ -76,6 +75,6 @@
         width: 12%;
         min-width: 12%;
         font-size: 3.5vw;
-        border-radius: 8px;
+        border-radius: 6px;
     }
 }
