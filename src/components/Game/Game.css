@@ -2,7 +2,7 @@
     font-size: clamp(0.5rem, 4vw, 1.3rem);
     font-weight: bold;
     margin-top: 0;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
     display: flex;
     justify-content: center;
 }
@@ -11,7 +11,7 @@
     display: grid;
     place-items: center;
     grid-template-columns: repeat(auto-fit, 1fr);  
-    gap: 1vh;
+    gap: 1.4vh;
     width: 100%;
     max-width: 600px; 
     margin: 0 auto; 
@@ -20,13 +20,10 @@
 .grid-item {
     display: flex;
     align-items: center;
-    justify-content: left;
-    gap: 10px;
-    padding: 10px; 
-    height: 40px;
+    gap: 10px; 
+    height: auto;
     font-weight: bold;
     text-align: center;
-    border-radius: 4px; 
 }
 
 #guessInput  {
@@ -89,10 +86,6 @@
 }
 
 @media (max-width: 350px) {
-    .grid-item {
-        height: 35px;
-        padding: 5px;
-    }
 
     .grid-item span {
         height: 35px;

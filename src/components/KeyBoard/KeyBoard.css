@@ -62,7 +62,7 @@
     }
 
     .keyBoardContainer div button {
-        height:  max(5.5vh, 31px);
+        height:  max(5.75vh, 32px);
         width: 9%;
         min-width: 9%;
         font-size: 3.5vw;
@@ -71,7 +71,7 @@
     }
     
     .keyBoardContainer .action {
-        height: max(5.5vh, 31px);
+        height: max(5.75vh, 32px);
         width: 12%;
         min-width: 12%;
         font-size: 3.5vw;
