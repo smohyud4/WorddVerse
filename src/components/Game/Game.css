@@ -19,6 +19,7 @@
   
 .grid-item {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 10px; 
     height: auto;

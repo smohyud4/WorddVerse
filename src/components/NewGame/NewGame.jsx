@@ -4,7 +4,7 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import { IoIosStats } from "react-icons/io";
 import './NewGame.css'
 
-const wordLengths = [4, 5, 6, 7];
+const wordLengths = [4, 5, 6, 7, 8];
 const letters = "abcdefghijklmnopqrstuvwxyz";
 const guessMap = {
   'blank': '⬜', 

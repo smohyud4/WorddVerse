@@ -1,10 +1,49 @@
 export function saveStats(stats) {
-  localStorage.setItem("lengthStats", JSON.stringify(stats));
+  localStorage.setItem("lengthStatss", JSON.stringify(stats));
 }
 
 export function loadStats() {
-  const savedStats = localStorage.getItem("lengthStats");
+  const savedStats = localStorage.getItem("lengthStatss");
   return savedStats ? JSON.parse(savedStats) : null;
+}
+
+export function initStats() {
+  const initialStats = loadStats();
+
+  if (!initialStats) {
+    let oldStats = localStorage.getItem("lengthStats");
+    
+    if (oldStats) {
+      oldStats = JSON.parse(oldStats);
+      let newStats = oldStats;
+      
+      newStats.push({
+        guessFrequency: [0, 0, 0, 0, 0, 0],
+        streak: 0,
+        bestStreak: 0,
+        bestTime: 10000000000,
+        totalTime: 0,
+        games: 0,
+        wins: 0
+      });
+
+      localStorage.removeItem("lengthStats");
+      saveStats(newStats);
+    }
+    else {
+      const defaultStats = Array(5).fill({
+        guessFrequency: [0, 0, 0, 0, 0, 0],
+        streak: 0,
+        bestStreak: 0,
+        bestTime: 10000000000,
+        totalTime: 0,
+        games: 0,
+        wins: 0
+      });
+
+      saveStats(defaultStats);
+    }
+  }
 }
 
 /*

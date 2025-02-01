@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { saveStats, loadStats, updateStats } from '../../utils/storage';
+import { loadStats, initStats, updateStats } from '../../utils/storage';
 import KeyBoard from '../KeyBoard/KeyBoard';
 import NewGame from '../NewGame/NewGame';
 import Row from '../Row/Row';
@@ -75,9 +75,10 @@ export default function Game() {
         `/data/5_letter_words.txt`,
         `/data/6_letter_words.txt`,
         `/data/7_letter_words.txt`,
+        `/data/8_letter_words.txt`
       ]; 
     
-      const [fourLetterWords, fiveLetterWords, sixLetterWords, sevenLetterWords] = await Promise.all(
+      const [fourLetterWords, fiveLetterWords, sixLetterWords, sevenLetterWords, eightLetterWords] = await Promise.all(
         paths.map(path => loadWordList(path))
       );
     
@@ -86,6 +87,7 @@ export default function Game() {
         5: fiveLetterWords,
         6: sixLetterWords,
         7: sevenLetterWords,
+        8: eightLetterWords
       });
 
       // console.log(fourLetterWords.length, fiveLetterWords.length, sixLetterWords.length, sevenLetterWords.length);
@@ -109,21 +111,8 @@ export default function Game() {
       window.history.replaceState({}, '', newUrl);
     }
 
-    const initialStats = loadStats();
-    if (!initialStats) {
-      const defaultStats = Array(4).fill({
-        guessFrequency: [0, 0, 0, 0, 0, 0],
-        streak: 0,
-        bestStreak: 0,
-        bestTime: 10000000000,
-        totalTime: 0,
-        games: 0,
-        wins: 0
-      });
-
-      saveStats(defaultStats);
-    }
-
+    initStats();
+  
     fetchWords();
   }, []);
 
@@ -154,14 +143,14 @@ export default function Game() {
       inputRef.current.blur();
       setWinnerMessage(`You guessed ${word}!`);
       const stats = loadStats();
-      updateStats(stats, guess, time, length.current, true);
+      if (stats) updateStats(stats, guess, time, length.current, true);
     }
     else if ((guess == 5 && length.current == 7) || guess == 6) {
       setGameOver(true);
       inputRef.current.blur();
       setWinnerMessage(`The word was ${word}.`);
       const stats = loadStats();
-      updateStats(stats, guess, time, length.current, false);
+      if (stats) updateStats(stats, guess, time, length.current, false);
     }
 
   }, [guess]);

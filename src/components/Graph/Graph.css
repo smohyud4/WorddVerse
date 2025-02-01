@@ -24,7 +24,7 @@
     align-items: flex-start; /* Align bars at the bottom */
     flex-direction: column;
     gap: 8px; /* Space between bars */
-    width: 85%;
+    width: 100%; 
     height: fit-content;
     padding: 10px;
     background-color: #f9f9f9; /* Light background for contrast */
@@ -74,8 +74,9 @@
 }
 
 @media (max-width: 600px) {
-    .frequency-graph {
-        width: 100%;
+    .length-container span {
+        width: 30px; 
+        height: 30px; 
     }
 }
 
