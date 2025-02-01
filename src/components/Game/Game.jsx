@@ -97,7 +97,7 @@ export default function Game() {
 
     if (validateLink(urlParams)) {
       const word = atob(urlParams.get('word'));
-      if (word.length >= 4 && word.length <= 7) {
+      if (word.length >= 4 && word.length <= 8) {
         setWord(word);
         length.current = word.length;
         setGameOver(false);
