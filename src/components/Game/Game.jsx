@@ -90,7 +90,7 @@ export default function Game() {
         8: eightLetterWords
       });
 
-      // console.log(fourLetterWords.length, fiveLetterWords.length, sixLetterWords.length, sevenLetterWords.length);
+      //console.log(fourLetterWords.length, fiveLetterWords.length, sixLetterWords.length, sevenLetterWords.length, eightLetterWords.length);
     }
     
     const urlParams = new URLSearchParams(window.location.search);
