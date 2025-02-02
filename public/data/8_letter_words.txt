@@ -612,7 +612,6 @@ humoring
 humorist
 humpback
 hungrily
-hurdling
 hurtling
 hydrogen
 hypnotic
@@ -667,7 +666,6 @@ kilogram
 klystron
 knightly
 knowable
-laboring
 lacewing
 ladyship
 lambency
@@ -679,7 +677,6 @@ launched
 launcher
 lavished
 lavisher
-layering
 leaching
 leashing
 leftward
@@ -891,7 +888,6 @@ patchier
 patchily
 patching
 pathogen
-peaching
 pearling
 pectoral
 peculiar
@@ -932,7 +928,6 @@ pleating
 ploughed
 plucking
 plumaged
-plumbing
 plutonic
 poaching
 podiatry
@@ -992,7 +987,6 @@ rebuking
 recoding
 recusant
 reducing
-refacing
 refusing
 refuting
 relating
@@ -1001,10 +995,6 @@ relaxing
 relaying
 remaking
 removing
-repaying
-replying
-reposing
-reputing
 requital
 rescuing
 residual
@@ -1035,7 +1025,6 @@ ruminate
 rumpling
 rustical
 rustling
-sabering
 saboteur
 sacredly
 saintdom
@@ -1049,10 +1038,8 @@ saponify
 sardonic
 savoring
 scalding
-scalping
 scamping
 scantily
-scarfing
 scathing
 scheming
 scolding
@@ -1093,7 +1080,6 @@ shocking
 shouting
 showgirl
 shrapnel
-shucking
 shutdown
 sidelong
 sidewalk
@@ -1112,13 +1098,10 @@ slangier
 slighted
 slouched
 sloughed
-slumping
-slurping
 smacking
 smearing
 smelting
 smidgeon
-smocking
 smoulder
 snatched
 snatcher
@@ -1140,8 +1123,6 @@ spangled
 sparking
 sparkled
 spavined
-spearing
-specking
 spectral
 specular
 sphenoid
@@ -1163,7 +1144,6 @@ sprinted
 sprocket
 sprouted
 sprucely
-sprucing
 spurting
 squadron
 squander
@@ -1172,7 +1152,6 @@ squaring
 squinted
 squirmed
 squirted
-stabling
 stacking
 stalking
 stamping
@@ -1192,7 +1171,6 @@ storming
 strafing
 strained
 strangle
-strawing
 straying
 stricken
 strickle

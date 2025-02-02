@@ -136,7 +136,8 @@ export default function NewGame({
         <br/>
         <form className="inputContainer">
           <label htmlFor="options">Word Length</label>
-          <select 
+          <select
+            id="options" 
             name="options" 
             value={lengthState} 
             onChange={handleChange}
@@ -145,9 +146,10 @@ export default function NewGame({
               <option key={index} value={length}>{length}</option>
             ))}
           </select>
-          <label>Validate Guess</label>
+          <label htmlFor="difficulty">Validate Guess</label>
           <input
             type="checkbox"
+            id="difficulty"
             name="difficulty"
             checked={validateState}
             onChange={handleChange}
