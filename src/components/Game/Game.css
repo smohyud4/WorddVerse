@@ -28,7 +28,14 @@
 }
 
 #guessInput  {
-    width: 266px;
+  width: 200px; 
+  border: 1px solid transparent; 
+  border-bottom: 1px solid #a8a6a6;
+  background-color: transparent;
+  text-align: center; 
+  outline: none; 
+  font-size: 1.2rem;
+  font-weight: 540;
 }
 
 .grid-item span {

@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 5px;
+    margin-top: 2px;
     gap: min(0.8vh, 5px);
 }
 

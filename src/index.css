@@ -72,6 +72,10 @@ button:focus-visible {
     color: white !important;
   }
 
+  #guessInput::placeholder {
+    color: #e6e6e6 !important;
+  }
+
   .frequency-graph {
     background-color: #333 !important; /* Dark background for contrast */
   }
