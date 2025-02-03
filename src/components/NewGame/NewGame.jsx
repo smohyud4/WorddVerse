@@ -6,6 +6,11 @@ import './NewGame.css'
 
 const wordLengths = [4, 5, 6, 7, 8];
 const letters = "abcdefghijklmnopqrstuvwxyz";
+const guessMap = {
+  'blank': '⬜', 
+  'wrong-position': '🟨', 
+  'correct': '🟩'
+};
 
 function generateGameId() {
   const n1 = Math.floor(Math.random()*10);
@@ -29,7 +34,6 @@ export default function NewGame({
  
   const [lengthState, setLengthState] = useState(length.current);
   const [validateState, setValidateState] = useState(checkWord.current);
-  const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   function getModalAnimation(message) {
     if (message === "WorddVerse") {
@@ -62,12 +66,6 @@ export default function NewGame({
   }
 
   function generateResult(colors, time) {
-    const guessMap = {
-      'blank': isDarkMode ? '⬛' : '⬜', // Switch based on dark mode
-      'wrong-position': '🟨',
-      'correct': '🟩'
-    };
-
     const grid = colors.map(row => {
       return row.map(color => guessMap[color]).join('');
     }).join('\n');
