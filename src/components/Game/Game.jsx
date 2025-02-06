@@ -148,7 +148,7 @@ export default function Game() {
     else if ((guess == 5 && length.current == 7) || guess == 6) {
       setGameOver(true);
       inputRef.current.blur();
-      setWinnerMessage(`The word was ${word}.`);
+      setWinnerMessage(`It was ${word}.`);
       const stats = loadStats();
       if (stats) updateStats(stats, guess, time, length.current, false);
     }

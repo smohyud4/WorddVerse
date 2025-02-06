@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { IoShareSocialOutline } from "react-icons/io5";
 import { IoIosStats } from "react-icons/io";
+import { IoSearchSharp } from "react-icons/io5";
 import './NewGame.css'
 
 const wordLengths = [4, 5, 6, 7, 8];
@@ -43,6 +44,11 @@ export default function NewGame({
     return message[message.length-1] == '!'
       ? {animation: 'grow 0.4s ease-in'}
       : {animation: 'fade 1s ease-in'}
+  }
+
+  function handleSearch(word) {
+    const searchURL = `https://www.google.com/search?q=define+${word}`;
+    window.open(searchURL, '_blank');
   }
 
   function handleChange(event) {
@@ -113,9 +119,17 @@ export default function NewGame({
         className="modal-content"
         style={getModalAnimation(message)}
       >
-        <h1 id="msg">{message || "Game over"}</h1>
-        {message != "WorddVerse" &&
+        {word ?
           <>
+            <h1 id="msg">
+              {message || "Game over"}
+              <button 
+                onClick={() => handleSearch(word)}
+                title="Search for word definition"
+              >
+                <IoSearchSharp/>
+              </button>
+            </h1>
             <div className="results">
               <h2>Time: {time}</h2>
               <h2><a href='/stats'><IoIosStats/></a></h2>
@@ -132,6 +146,7 @@ export default function NewGame({
               ))}
             </div>
           </>
+          : <h1 id="msg">{message || "Game over"}</h1>
         }
         <br/>
         <form className="inputContainer">
