@@ -103,7 +103,7 @@ export default function Game() {
         setWord(word);
         length.current = word.length;
         setGameOver(false);
-        gameOverRef.current = true;
+        gameOverRef.current = false;
       }
       id.current = urlParams.get('id');
 
