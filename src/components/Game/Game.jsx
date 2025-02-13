@@ -8,6 +8,7 @@ import ColorModal from '../ColorModal/ColorModal';
 import './Game.css';
 
 const map = ['one', 'two', 'three', 'four', 'five', 'six'];
+const DELAY = 200;
 
 function validateLink(params) {
   if (!params.has('word') || !params.has('id') || !params.has('expiry'))
@@ -56,6 +57,7 @@ export default function Game() {
   const length = useRef(5);
   const colors = useRef([]);
   const inputRef = useRef(null);
+  const gameOverRef = useRef(true); // Needed to prevent extra guesses
 
   useEffect(() => {
     async function fetchWords() {
@@ -139,18 +141,24 @@ export default function Game() {
 
   useEffect(() => { 
     if (guess != 0 && checkGuess()) {
-      setGameOver(true);
-      inputRef.current.blur();
-      setWinnerMessage(`You guessed ${word}!`);
-      const stats = loadStats();
-      if (stats) updateStats(stats, guess, time, length.current, true);
+      gameOverRef.current = true;
+      setTimeout(() => {
+        setGameOver(true);
+        inputRef.current.blur();
+        setWinnerMessage(`You guessed ${word}!`);
+        const stats = loadStats();
+        if (stats) updateStats(stats, guess, time, length.current, true);
+      }, length.current * DELAY);
     }
     else if ((guess == 5 && length.current == 7) || guess == 6) {
-      setGameOver(true);
-      inputRef.current.blur();
-      setWinnerMessage(`It was ${word}.`);
-      const stats = loadStats();
-      if (stats) updateStats(stats, guess, time, length.current, false);
+      gameOverRef.current = true;
+      setTimeout(() => {
+        setGameOver(true);
+        inputRef.current.blur();
+        setWinnerMessage(`It was ${word}.`);
+        const stats = loadStats();
+        if (stats) updateStats(stats, guess, time, length.current, false);
+      }, length.current * DELAY);
     }
 
   }, [guess]);
@@ -189,6 +197,7 @@ export default function Game() {
     setTime(0);
     colors.current = [];
     id.current = null;
+    gameOverRef.current = false;
 
     const keys = document.querySelectorAll('.keyBoardContainer button');
     keys.forEach((key) => {
@@ -206,13 +215,17 @@ export default function Game() {
   function checkGuess() {
     let winner = true;
     const potential = [];
-    const charColors = Array.from({ length: length });
+    const charColors = Array.from({ length: length.current });
+    const keyColors = {};
     const freq = {};
     const exactMatches = {};
 
     for (const char of word) {
       freq[char] = (freq[char] || 0) + 1;
       exactMatches[char] = 0;
+    }
+    for (const char of words[map[guess-1]]) {
+      keyColors[char] = '';
     }
 
     /*
@@ -223,20 +236,16 @@ export default function Game() {
 
     for (let i=0; i < length.current; i++) {
       const char = words[map[guess-1]][i].toLowerCase();
-      const charTag = document.getElementById(`${guess}${i}`);
-      const keyTag = document.getElementById(char.toUpperCase());
- 
+
       if (char === word[i]) {
-        charTag.className = "correct";
-        keyTag.className = "correct";
         charColors[i] = "correct";
+        keyColors[char.toUpperCase()] = "correct";
         exactMatches[char]++;
         freq[char]--;
       }
       else if (!word.includes(char)) {
-        charTag.className = "blank";
-        keyTag.classList.add("blank");
         charColors[i] = "blank";
+        keyColors[char.toUpperCase()] = "blank";
         winner = false;
       }
       else {
@@ -246,27 +255,31 @@ export default function Game() {
     }
 
     for (const {char, i} of potential) {
-      const charTag = document.getElementById(`${guess}${i}`);
-      const keyTag = document.getElementById(char.toUpperCase());
 
       if (freq[char] > 0) {
-        charTag.className = "wrong-position";
         charColors[i] = "wrong-position";
 
-        if (exactMatches[char] > 0 && exactMatches[char] < freq[char]+1) {
-          keyTag.classList.remove("correct");
-          keyTag.classList.add("mixed");
-        }
-        else {
-          keyTag.classList.add("wrong-position");
-        }
+        exactMatches[char] > 0 && exactMatches[char] < freq[char]+1
+          ? keyColors[char.toUpperCase()] = "mixed"
+          : keyColors[char.toUpperCase()] = "wrong-position";
+
         freq[char]--;
       } 
       else {
-        charTag.className = "blank";
-        keyTag.classList.add("blank");
         charColors[i] = "blank";
       } 
+    }
+
+    for (let i=0; i < length.current; i++) {
+      setTimeout(() => {
+        const char = words[map[guess-1]][i];
+        const keyTag = document.getElementById(char);
+        const charTag = document.getElementById(`${guess}${i}`);
+
+        charTag.className = charColors[i];
+        if (!(keyTag.className == 'correct' && keyColors[char] == 'wrong-position'))
+          keyTag.className = keyColors[char];
+      }, i * DELAY);
     }
 
     colors.current.push(charColors);
@@ -303,6 +316,7 @@ export default function Game() {
   }
 
   function takeGuess() {
+    if (gameOverRef.current) return;
     if (words[map[guess]].length != length.current) {
       alert('Not enough letters');
       return;
