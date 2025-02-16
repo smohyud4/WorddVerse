@@ -1455,7 +1455,6 @@ capers
 choirs
 kiosks
 shades
-greeds
 badges
 courts
 idiots
@@ -1494,7 +1493,6 @@ pliers
 pleats
 levers
 jewels
-radars
 vomits
 pokers
 frowns
