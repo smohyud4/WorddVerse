@@ -8,7 +8,6 @@ import ColorModal from '../ColorModal/ColorModal';
 import './Game.css';
 
 const map = ['one', 'two', 'three', 'four', 'five', 'six'];
-const DELAY = 200;
 
 function validateLink(params) {
   if (!params.has('word') || !params.has('id') || !params.has('expiry'))
@@ -58,6 +57,7 @@ export default function Game() {
   const colors = useRef([]);
   const inputRef = useRef(null);
   const gameOverRef = useRef(true); // Needed to prevent extra guesses
+  const DELAY = -12*(length.current-4) + 258;
 
   useEffect(() => {
     async function fetchWords() {

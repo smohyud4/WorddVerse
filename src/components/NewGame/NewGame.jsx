@@ -6,20 +6,19 @@ import { IoSearchSharp } from "react-icons/io5";
 import './NewGame.css'
 
 const wordLengths = [4, 5, 6, 7, 8];
-const letters = "abcdefghijklmnopqrstuvwxyz";
+const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const guessMap = {
   'blank': '⬜', 
   'wrong-position': '🟨', 
   'correct': '🟩'
 };
 
-function generateGameId() {
-  const n1 = Math.floor(Math.random()*10);
-  const n2 = Math.floor(Math.random()*10);
+function generateGameId(length) {
   const s1 = Math.floor(Math.random()*26);
   const s2 = Math.floor(Math.random()*26);
+  const s3 = Math.floor(Math.random()*26);
 
-  return `${n1}${n2}${letters[s1]}${letters[s2]}`;
+  return `${length}${letters[s1]}${letters[s2]}${letters[s3]}`;
 }
 
 export default function NewGame({
@@ -85,7 +84,7 @@ export default function NewGame({
     let shareURL;
     if (challenge) {
       // Expire after 2 days (hours)
-      const id = generateGameId();
+      const id = generateGameId(length.current);
       const expiryTimestamp =  Math.floor(Date.now() / 1000 / 3600) + 48;
       shareURL = `${window.location.origin}?word=${btoa(word)}&id=${id}&expiry=${expiryTimestamp}`;
       result = `WorddVerse #${id}\n${result}\nBeat that!`;
@@ -103,7 +102,7 @@ export default function NewGame({
           url: shareURL,
         })
         .then(() => console.log('Shared successfully'))
-        .catch(() => alert('Error sharing :('));
+        .catch(() => console.log('Failed to share'));
     } 
     else {
       console.log(shareURL);
