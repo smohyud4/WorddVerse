@@ -14,9 +14,9 @@ const guessMap = {
 };
 
 function generateGameId(length) {
-  const s1 = Math.floor(Math.random()*26);
-  const s2 = Math.floor(Math.random()*26);
-  const s3 = Math.floor(Math.random()*26);
+  const s1 = Math.floor(Math.random()*letters.length);
+  const s2 = Math.floor(Math.random()*letters.length);
+  const s3 = Math.floor(Math.random()*letters.length);
 
   return `${length}${letters[s1]}${letters[s2]}${letters[s3]}`;
 }
