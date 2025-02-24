@@ -50,6 +50,7 @@ export default function Game() {
   const [time, setTime] = useState(0);
   const [colorModal, setColorModal] = useState(false);
   const [currentIndex, setIndex] = useState(0);
+  const DELAY = (-10*(word.length-4) + 250);
 
   const id = useRef(null);
   const checkWord = useRef(false);
@@ -57,7 +58,6 @@ export default function Game() {
   const colors = useRef([]);
   const inputRef = useRef(null);
   const gameOverRef = useRef(true); // Needed to prevent extra guesses
-  const DELAY = (-12*(length.current-4) + 258) - 5; // 205ms for 8 letters, 253ms for 4 letters
 
   useEffect(() => {
     async function fetchWords() {
