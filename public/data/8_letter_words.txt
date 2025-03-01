@@ -801,7 +801,6 @@ nightcap
 nimblest
 nobelium
 normalcy
-notarize
 novelist
 nugatory
 numeracy
@@ -1265,9 +1264,7 @@ earmuffs
 sprinter
 irritate
 scorpion
-jodhpurs
 honeybee
-ischemia
 homework
 brushing
 chivalry
@@ -1399,7 +1396,6 @@ mutation
 beginner
 misspell
 theology
-mariachi
 decorous
 backbone
 typeface
@@ -1408,7 +1404,6 @@ rhetoric
 marathon
 meridian
 countess
-bakeware
 boutique
 radiator
 backdrop
@@ -1425,7 +1420,6 @@ brochure
 wasteful
 bookmark
 browsing
-yarmulke
 semester
 tailspin
 misnomer
@@ -1500,7 +1494,6 @@ troubled
 caffeine
 platypus
 cartload
-pheasant
 toreador
 robotics
 crusader
@@ -1553,7 +1546,6 @@ bunghole
 porthole
 fabulous
 flagrant
-grandmom
 vicinity
 swanling
 graffiti
