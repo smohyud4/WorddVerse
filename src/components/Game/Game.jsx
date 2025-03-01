@@ -219,10 +219,12 @@ export default function Game() {
     const charColors = Array.from({ length: length.current });
     const keyColors = {};
     const freq = {};
+    const fixedFreq = {};
     const exactMatches = {};
 
     for (const char of word) {
       freq[char] = (freq[char] || 0) + 1;
+      fixedFreq[char] = (fixedFreq[char] || 0) + 1;
       exactMatches[char] = 0;
     }
     for (const char of words[map[guess-1]]) {
@@ -260,7 +262,7 @@ export default function Game() {
       if (freq[char] > 0) {
         charColors[i] = "wrong-position";
 
-        exactMatches[char] > 0 && exactMatches[char] < freq[char]+1
+        exactMatches[char] > 0 && exactMatches[char] < fixedFreq[char]
           ? keyColors[char.toUpperCase()] = "mixed"
           : keyColors[char.toUpperCase()] = "wrong-position";
 
@@ -278,7 +280,7 @@ export default function Game() {
         const charTag = document.getElementById(`${guess}${i}`);
 
         charTag.className = charColors[i];
-        if (!(keyTag.className == 'correct' && keyColors[char] == 'wrong-position'))
+        if (!((keyTag.className == 'correct' || keyTag.className == 'mixed') && keyColors[char] == 'wrong-position'))
           keyTag.className = keyColors[char];
       }, i * DELAY);
     }
