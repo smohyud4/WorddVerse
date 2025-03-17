@@ -29,7 +29,7 @@ export default function CustomWord({setDis}) {
   }
   
   return (
-    <div role="dialog" className="modal">
+    <div role="dialog" className="navbar-modal">
       <div className="modal-content">
         <div className="custom-container">
           <h2 id='msg'>Send a custom word</h2>
