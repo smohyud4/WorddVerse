@@ -57,11 +57,17 @@ export default function Game() {
         }
       }
 
+      id.current = urlParams.get('id');
+      let difficulty = id.current[1];
+      if (difficulty == 'H') {
+        LIMIT.current = 360;
+        setTime(360);
+      }
+
       length.current = 4;
       setWord(roundWords.current[0]);
       setGameOver(false);
       gameOverRef.current = false;
-      id.current = urlParams.get('id');
 
       urlParams.delete('word1');
       urlParams.delete('word2');
@@ -115,11 +121,12 @@ export default function Game() {
       }, length.current * DELAY);
     }
     else if (guess == 6) {
+      roundTimes.current.push(LIMIT.current - roundTimes.current.reduce((a, b) => a + b, 0) - time);
       gameOverRef.current = true;
       setTimeout(() => {
         setGameOver(true);
         inputRef.current.blur();
-        setWinnerMessage(`It was ${word}.`);
+        setWinnerMessage(`You lose.`);
       }, length.current * DELAY);
     }
     else {

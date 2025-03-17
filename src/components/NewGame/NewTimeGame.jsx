@@ -53,7 +53,7 @@ export default function NewGame({
     let result = generateResult(colors, times);
     let shareURL;
     if (challenge) {
-      const id = generateGameId('TT');
+      const id = generateGameId(`T${limit.current == 720 ? 'E' : 'H'}`);
       shareURL = `${window.location.href}?`;
       for (let i=0; i < words.length; i++) {
         const word = words[i];
@@ -100,7 +100,9 @@ export default function NewGame({
             return (
               <div key={index} className="time-bar">
                 <IoMdTime className="time-icon"/>
-                <p>{words[index]} {time}</p>
+                <p className={index == times.length-1 && message != "You win!" ? 'failure' : ''}>
+                  {words[index]} {time}
+                </p>
               </div>
             )
           })}

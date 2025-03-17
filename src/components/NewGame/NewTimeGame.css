@@ -20,3 +20,7 @@
 .time-bar p {
   margin: 0;
 }
+
+.time-bar .failure {
+  color: red;
+}
