@@ -32,7 +32,6 @@ export default function Graph({stats, length}) {
     </p>
     <div className="frequency-graph">
       {stats.guessFrequency.map((freq, index) => {
-        if (index === 5 && length === 7) return null;
         return (
           <div key={index} className="bar-container">
             <span>{index+1}</span>
