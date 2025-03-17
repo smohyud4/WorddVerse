@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
+import {share} from '../../utils/share';
 import { IoShareSocialOutline } from "react-icons/io5";
 import { IoIosStats } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
@@ -79,14 +80,12 @@ export default function NewGame({
   }
 
   function handleShare(challenge) {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
     let result = generateResult(colors, time);
     let shareURL;
     if (challenge) {
-      // Expire after 2 days (hours)
       const id = generateGameId(length.current);
-      const expiryTimestamp =  Math.floor(Date.now() / 1000 / 3600) + 48;
-      shareURL = `${window.location.origin}?word=${btoa(word)}&id=${id}&expiry=${expiryTimestamp}`;
+      shareURL = `${window.location.origin}?word=${btoa(word)}&id=${id}`;
       result = `WorddVerse #${id}\n${result}\nBeat that!`;
     }
     else {
@@ -94,22 +93,7 @@ export default function NewGame({
       result = `WorddVerse #${gameId}\n${result}\n${word}`;
     }
 
-    if (isMobile && navigator.share) {
-      navigator
-        .share({
-          title: `WorddVerse`,
-          text: result,
-          url: shareURL,
-        })
-        .then(() => console.log('Shared successfully'))
-        .catch(() => console.log('Failed to share'));
-    } 
-    else {
-      console.log(shareURL);
-      navigator.clipboard.writeText(`${result}\n${shareURL}`)
-        .then(() => alert('Results copied to clipboard!'))
-        .catch(() => alert('Failed to copy results.'));
-    }
+    share(result, shareURL);
   }
 
   return (

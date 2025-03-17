@@ -29,7 +29,7 @@ export default function Stats() {
   }
 
   return <> 
-    <Header title="WorddVerse" setDisplay={() => {}}/>
+    <Header/>
     <main>
       <section className="stats-container">
         <div className="game-stats">

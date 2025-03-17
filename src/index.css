@@ -3,10 +3,6 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,12 +11,34 @@
   --correct-color: #6aaa64;
   --wrong-position-color: #c9b458;
   --mixed-color: linear-gradient(45deg, #c9b458, #6aaa64);
+  --text-color: #213547;
+  --bg-color: #ffffff;
+  --b-text-color:  black;
+  --b-bg-color: #f9f9f9;
+  --b-border-color: black;
+  --modal-bg-color: #fefefe;
+  --nav-bg-color: rgba(248, 248, 248);
+  --placeholder-color: #5f5f5f;
+}
+
+[data-theme="dark"] {
+  --text-color: #f9f9f9;
+  --bg-color: #242424;
+  --b-text-color: #f9f9f9;
+  --b-bg-color: #222;
+  --b-border-color: #c8c8c8;
+  --modal-bg-color: #333;
+  --nav-bg-color: #222;
+  --placeholder-color: #e6e6e6;
 }
 
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.25s ease-in-out;
 } 
 
 button {
@@ -30,61 +48,19 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--b-bg-color);
+  color: var(--b-text-color);
   cursor: pointer;
   transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: var(--b-border-color);
 }
 
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 } 
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  button {
-    color: black;
-    background-color: #f9f9f9;
-  }
-
-  button:hover {
-    border-color: black;
-  }
-
-  .keyBoardContainer button {
-    color: black !important;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-
-  button {
-    color: #f9f9f9 !important;
-  }
-
-  button:hover {
-    border-color: #c8c8c8;
-  }
-
-  .modal-content {
-      background-color: #333 !important; /* Modal background for dark mode */
-  }
-
-  a {
-    color: white !important;
-  }
-
-  #guessInput::placeholder {
-    color: #e6e6e6 !important;
-  }
-
-  .frequency-graph {
-    background-color: #333 !important; /* Dark background for contrast */
-  }
-}
 
 

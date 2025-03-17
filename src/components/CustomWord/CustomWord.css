@@ -1,0 +1,28 @@
+.modal-content .custom-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-content .custom-input {
+    width: 180px; 
+    border-radius: 0;
+    border: 1px solid transparent; 
+    border-bottom: 1px solid #5f5f5f;
+    background-color: transparent;
+    text-align: center; 
+    outline: none; 
+    font-size: 1.2rem;
+    font-weight: 540;
+    margin: 0 auto;
+    color: inherit;
+}
+
+.modal-content .custom-input::placeholder {
+    color: var(--placeholder-color);
+}
+
+.custom-container p {
+    color: red;
+}
+

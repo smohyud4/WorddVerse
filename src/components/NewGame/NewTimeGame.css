@@ -1,0 +1,22 @@
+.modal-content .time-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.time-container .time-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.3rem;
+}
+
+.time-container h2 {
+  text-decoration: underline;
+}
+
+.time-bar p {
+  margin: 0;
+}

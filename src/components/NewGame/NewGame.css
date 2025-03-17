@@ -11,7 +11,7 @@
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--modal-bg-color);
     border-radius: 10px;
     margin: 5% auto;
     padding: 20px;
@@ -28,6 +28,11 @@
 @keyframes fade {
     from {opacity: 0;}
     to {opacity: 1;}
+}
+
+#options {
+    background-color: var(--modal-bg-color);
+    color: inherit;
 }
 
 #msg {
@@ -51,7 +56,7 @@
 .modal-content .results a {
     display: flex;
     align-items: center;
-    color: black;
+    color: inherit;
 }
 
 .modal-content .inputContainer {

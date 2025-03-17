@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { useWordLists } from '../../context/WordListContext';
-import { loadStats, initStats, updateStats } from '../../utils/storage';
 import KeyBoard from '../KeyBoard/KeyBoard';
-import NewGame from '../NewGame/NewGame';
+import NewTimeGame from '../NewGame/NewTimeGame';
 import Row from '../Row/Row';
 import Header from '../Header/Header';
-import './Game.css';
 
 const map = ['one', 'two', 'three', 'four', 'five', 'six'];
 
 function validateLink(params) {
-  return params.has('word') && params.has('id');
+  return params.has('word1') && params.has('word2') 
+  && params.has('word3') && params.has('word4') 
+  && params.has('word5') && params.has('id');
 }
 
 export default function Game() {
@@ -27,14 +27,18 @@ export default function Game() {
   const [word, setWord] = useState('');
   const [guess, setGuess] = useState(0);
   const [gameOver, setGameOver] = useState(true);
-  const [winnerMessage, setWinnerMessage] = useState("WorddVerse");
-  const [time, setTime] = useState(0);
+  const [winnerMessage, setWinnerMessage] = useState("Time Trial");
+  const [time, setTime] = useState(720);
   const DELAY = (-10*(word.length-4) + 250);
 
   const id = useRef(null);
+  const LIMIT = useRef(720);
   const checkWord = useRef(false);
-  const length = useRef(5);
+  const length = useRef(4);
   const colors = useRef([]);
+  const allColors = useRef([]);
+  const roundWords = useRef([]);
+  const roundTimes = useRef([]);
   const inputRef = useRef(null);
   const gameOverRef = useRef(true); // Needed to prevent extra guesses
 
@@ -42,29 +46,39 @@ export default function Game() {
     const urlParams = new URLSearchParams(window.location.search);
 
     if (validateLink(urlParams)) {
-      const word = atob(urlParams.get('word'));
-      if (word.length >= 4 && word.length <= 8) {
-        setWord(word);
-        length.current = word.length;
-        setGameOver(false);
-        gameOverRef.current = false;
+      for (let i=1; i <= 5; i++) {
+        const word = atob(urlParams.get(`word${i}`));
+        if (word.length != i+3) {
+          reset(false);
+          return;
+        }
+        else {
+          roundWords.current.push(word);
+        }
       }
+
+      length.current = 4;
+      setWord(roundWords.current[0]);
+      setGameOver(false);
+      gameOverRef.current = false;
       id.current = urlParams.get('id');
 
-      urlParams.delete('word');
+      urlParams.delete('word1');
+      urlParams.delete('word2');
+      urlParams.delete('word3');
+      urlParams.delete('word4');
+      urlParams.delete('word5');
       urlParams.delete('id');
       const newUrl = `${window.location.origin}${window.location.pathname}`;
       window.history.replaceState({}, '', newUrl);
     }
-
-    initStats();
   }, []);
 
   useEffect(() => {
     let intervalId;
     if (!gameOver) {
       intervalId = setInterval(() => {
-        setTime((prevTime) => prevTime + 1);
+        setTime((prevTime) => prevTime - 1);
       }, 1000);
     }
     else {
@@ -83,29 +97,47 @@ export default function Game() {
 
   useEffect(() => { 
     if (guess != 0 && checkGuess()) {
-      gameOverRef.current = true;
       setTimeout(() => {
-        setGameOver(true);
-        inputRef.current.blur();
-        setWinnerMessage(`You guessed ${word}!`);
-        const stats = loadStats();
-        if (stats) updateStats(stats, guess, time, length.current, true);
+        if (length.current == 8) {
+          roundTimes.current.push(LIMIT.current - roundTimes.current.reduce((a, b) => a + b, 0) - time);
+          allColors.current.push(colors.current);
+          
+          setGameOver(true);
+          inputRef.current.blur();
+          setWinnerMessage('You win!');
+        }
+        else {
+          length.current += 1;
+          reset(true);
+          gameOverRef.current = false;
+        }
+
       }, length.current * DELAY);
     }
-    else if ((guess == 5 && length.current == 7) || guess == 6) {
+    else if (guess == 6) {
       gameOverRef.current = true;
       setTimeout(() => {
         setGameOver(true);
         inputRef.current.blur();
         setWinnerMessage(`It was ${word}.`);
-        const stats = loadStats();
-        if (stats) updateStats(stats, guess, time, length.current, false);
       }, length.current * DELAY);
+    }
+    else {
+      gameOverRef.current = false;
     }
 
   }, [guess]);
 
-  function formatTime() {
+  useEffect(() => {
+    if (time <= 0) {
+      inputRef.current.blur();
+      gameOverRef.current = true;
+      setGameOver(true);
+      setWinnerMessage(`Time's up!`);
+    }
+  }, [time]);
+
+  function formatTime(time) {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
@@ -116,7 +148,7 @@ export default function Game() {
     return wordLists[length][randomIndex];
   }
 
-  function resetGame() {
+  function reset(round) {
     setWords({
       one: '',
       two: '',
@@ -126,13 +158,29 @@ export default function Game() {
       six: ''
     });
 
-    setGameOver(false);
-    setWord(generateWord(length.current));
+    if (!round) {
+      length.current = 4;
+      setGameOver(false);
+      gameOverRef.current = false;
+      allColors.current = [];
+      roundWords.current = [];
+      roundTimes.current = [];
+      id.current = null;
+
+      for (let len=4; len <= 8; len++) {
+        roundWords.current.push(generateWord(len));
+      }
+      setWord(roundWords.current[0]);
+    }
+    else {
+      roundTimes.current.push(LIMIT.current - roundTimes.current.reduce((a, b) => a + b, 0) - time);
+      setWord(roundWords.current[length.current-4]);
+      allColors.current.push(colors.current);
+    }
+
     setGuess(0);
-    setTime(0);
+
     colors.current = [];
-    id.current = null;
-    gameOverRef.current = false;
 
     const keys = document.querySelectorAll('.keyBoardContainer button');
     keys.forEach((key) => {
@@ -146,8 +194,8 @@ export default function Game() {
     });
   }
 
-
   function checkGuess() {
+    gameOverRef.current = true;
     let winner = true;
     const potential = [];
     const charColors = Array.from({ length: length.current });
@@ -269,19 +317,11 @@ export default function Game() {
     }
   } 
 
-  /*function randomGuess() {
-    const word = generateWord(length.current).toUpperCase();
-    setWords((prevWords) => ({
-      ...prevWords,
-      [map[guess]]: word,
-    }));
-
-    setGuess(prev => prev+1);
-  }*/
+  if (!wordLists) return <p>Loading words...</p>;
 
   return <>
     <Header/>
-    <p id="time">{formatTime()}</p>
+    <p id="time">{formatTime(time)}</p>
     <main className="container">
       {Array.from({ length: 6 }).map((_, index) => (
         <Row 
@@ -311,15 +351,16 @@ export default function Game() {
       />
     </main>
     {gameOver && (
-      <NewGame 
+      <NewTimeGame 
         message={winnerMessage}
-        word={word}
-        time={formatTime()}
-        colors={colors.current}
-        length={length}
-        checkWord={checkWord}
+        words={roundWords.current}
+        times={roundTimes.current.map(time => formatTime(time))}
+        total={formatTime(roundTimes.current.reduce((a, b) => a + b, 0))}
+        colors={allColors.current}
+        setTime={setTime}
+        limit={LIMIT}
         gameId={id.current}
-        reset={resetGame}
+        reset={reset}
       />
     )}
     </>
