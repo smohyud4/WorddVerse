@@ -139,6 +139,8 @@ export default function Game() {
   useEffect(() => {
     if (time <= 0) {
       inputRef.current.blur();
+      roundTimes.current.push(LIMIT.current - roundTimes.current.reduce((a, b) => a + b, 0) - time);
+      allColors.current.push(colors.current);
       gameOverRef.current = true;
       setGameOver(true);
       setWinnerMessage(`Time's up!`);
