@@ -122,6 +122,7 @@ export default function Game() {
     }
     else if (guess == 6) {
       roundTimes.current.push(LIMIT.current - roundTimes.current.reduce((a, b) => a + b, 0) - time);
+      allColors.current.push(colors.current);
       gameOverRef.current = true;
       setTimeout(() => {
         setGameOver(true);
