@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import CustomWord from '../CustomWord/CustomWord';
 import ColorModal from '../ColorModal/ColorModal';
@@ -12,7 +11,7 @@ export default function Header() {
   const [customWordModal, setCustomWordModal] = useState(false);
   const [colorModal, setColorModal] = useState(false);
   const [currentIndex, setIndex] = useState(0);
-  const [colorSet, setColorSet] = useState({
+  const [colorSet, setColorSet] = useState(JSON.parse(localStorage.getItem("colorSetWV23748893")) || {
     blank: "#a19e9e",
     wrongPosition: "#c9b458",
     mixed: "linear-gradient(45deg, #c9b458, #6aaa64)",
@@ -25,6 +24,7 @@ export default function Header() {
     document.documentElement.style.setProperty("--correct-color", colorSet.correct);
     document.documentElement.style.setProperty("--wrong-position-color", colorSet.wrongPosition);
     document.documentElement.style.setProperty("--mixed-color", colorSet.mixed);
+    localStorage.setItem("colorSetWV23748893", JSON.stringify(colorSet));
   }, [colorSet]);
 
   useEffect(() => {
