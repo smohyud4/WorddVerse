@@ -143,7 +143,7 @@ export default function Game() {
       allColors.current.push(colors.current);
       gameOverRef.current = true;
       setGameOver(true);
-      setWinnerMessage(`Time's up!`);
+      setWinnerMessage(`Time's up.`);
     }
   }, [time]);
 
