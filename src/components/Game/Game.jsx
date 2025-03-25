@@ -92,7 +92,7 @@ export default function Game() {
         if (stats) updateStats(stats, guess, time, length.current, true);
       }, length.current * DELAY);
     }
-    else if ((guess == 5 && length.current == 7) || guess == 6) {
+    else if (guess == 6) {
       gameOverRef.current = true;
       setTimeout(() => {
         setGameOver(true);

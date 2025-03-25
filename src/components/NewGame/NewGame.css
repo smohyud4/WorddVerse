@@ -30,8 +30,9 @@
 }
 
 #options {
-    background-color: var(--modal-bg-color);
-    color: inherit;
+    /* Make sure browser doesn't add default styles */
+    background-color: var(--modal-bg-color) !important;
+    color: inherit !important;
 }
 
 #msg {
