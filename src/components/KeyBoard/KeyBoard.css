@@ -59,13 +59,14 @@
     }
 
     #rowTwo  {
-        gap: 1%;
+        gap: 1.45%;
     }
 
     .keyBoardContainer div button {
         height:  max(5.75vh, 32px);
-        width: 9%;
-        min-width: 9%;
+        padding: 0;
+        width: 8.5%;
+        min-width: 8.5%;
         font-size: 3.5vw;
         border-radius: 6px;
         margin: 0;
