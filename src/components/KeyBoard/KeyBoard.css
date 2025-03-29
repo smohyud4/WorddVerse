@@ -58,12 +58,16 @@
         margin-top: 0;
     }
 
+    #rowOne {
+        justify-content: space-between;
+    }
+
     #rowTwo  {
-        gap: 1.45%;
+        gap: 1.67%;
     }
 
     .keyBoardContainer div button {
-        height:  max(5.75vh, 32px);
+        height:  max(5.75vh, 33px);
         padding: 0;
         width: 8.5%;
         min-width: 8.5%;
@@ -73,7 +77,7 @@
     }
     
     .keyBoardContainer .action {
-        height: max(5.75vh, 32px);
+        height: max(5.75vh, 33px);
         width: 12%;
         min-width: 12%;
         font-size: 3.5vw;
