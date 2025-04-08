@@ -17,6 +17,12 @@
   text-decoration: underline;
 }
 
+.time-container h3 {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  font-weight: 400;
+}
+
 .time-bar p {
   margin: 0;
 }
