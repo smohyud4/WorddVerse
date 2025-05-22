@@ -764,7 +764,6 @@ modishly
 modulate
 moisture
 molarity
-moleskin
 monarchy
 monastic
 monkfish
@@ -821,17 +820,14 @@ olympiad
 opaquely
 operatic
 ordinate
-organdie
 organism
 organist
 orgasmic
 orgastic
 oriental
-origanum
 ornately
 orphaned
 osculate
-outbrave
 outbreak
 outcried
 outdrive
@@ -932,7 +928,6 @@ polished
 polisher
 pomading
 pomander
-ponytail
 postcard
 postlude
 postmark
@@ -1596,3 +1591,13 @@ needless
 talented
 reindeer
 airfield
+fighting
+sometime
+stronger
+possibly
+fastened
+feathers
+suddenly 
+settlers
+darkness
+believed

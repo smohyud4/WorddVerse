@@ -1413,14 +1413,11 @@ wrecks
 horses
 creams
 flares
-chilis
 floats
 awards
 robots
 saints
 admits
-sitars
-pinots
 avoids
 juices
 commas
@@ -1444,8 +1441,6 @@ robins
 spices
 snores
 petals
-salons
-flours
 others
 attics
 chicks
@@ -1532,7 +1527,6 @@ gavels
 albums
 clamps
 shares
-manors
 dwarfs
 steaks
 guilts
@@ -1563,7 +1557,6 @@ plants
 meters
 crowds
 sieges
-scarfs
 straps
 pastes
 proves
