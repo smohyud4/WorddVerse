@@ -1427,7 +1427,6 @@ locals
 writes
 spills
 powers
-irates
 sharks
 serums
 utters
@@ -1476,7 +1475,6 @@ corals
 sounds
 bathes
 dozens
-shelfs
 solids
 oceans
 finals

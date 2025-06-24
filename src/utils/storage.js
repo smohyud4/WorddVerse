@@ -1,3 +1,16 @@
+const guessesCache = {};
+
+export async function loadGuessesForLength(length) {
+  if (!guessesCache[length]) {
+    const res = await fetch(`/words/${length}/guesses.txt`);
+    const text = await res.text();
+    const words = text.split('\n').map(word => word.trim());
+    guessesCache[length] = new Set(words); 
+  }
+
+  return guessesCache[length];
+}
+
 export function saveStats(stats) {
   localStorage.setItem("lengthStatss", JSON.stringify(stats));
 }

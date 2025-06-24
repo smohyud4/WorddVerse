@@ -58,7 +58,6 @@ almanac
 already
 alright
 alumnus
-amadeus
 amateur
 amazing
 ambient
@@ -134,7 +133,6 @@ attract
 auction
 audible
 augment
-austria
 autopsy
 average
 aviator
@@ -208,7 +206,6 @@ caribou
 carrier
 cartoon
 cascade
-cassidy
 catfish
 caution
 central
@@ -712,7 +709,6 @@ liberal
 liberty
 library
 license
-lincoln
 lipread
 literal
 livable
@@ -722,7 +718,6 @@ lovable
 lovebug
 lullaby
 machine
-madison
 madness
 magical
 magnify
@@ -749,7 +744,6 @@ mercury
 mermaid
 message
 methane
-michael
 midterm
 migrant
 migrate
@@ -1118,9 +1112,7 @@ seventy
 several
 shelter
 sheriff
-sherman
 shifter
-shirley
 shooter
 shorter
 sidearm

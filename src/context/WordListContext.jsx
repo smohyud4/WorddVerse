@@ -11,7 +11,7 @@ export function WordListProvider({ children }) {
       async function loadWordList(path) {
         try {
           const response = await fetch(path);
-          const text = await response.text();
+          const text = await response.text(); 
           return text.split("\n").map((word) => word.trim());
         } catch (error) {
           console.error(error);
@@ -20,11 +20,11 @@ export function WordListProvider({ children }) {
       }
 
       const paths = [
-        `/data/4_letter_words.txt`,
-        `/data/5_letter_words.txt`,
-        `/data/6_letter_words.txt`,
-        `/data/7_letter_words.txt`,
-        `/data/8_letter_words.txt`,
+        `/words/4/solutions.txt`,
+        `/words/5/solutions.txt`,
+        `/words/6/solutions.txt`,
+        `/words/7/solutions.txt`,
+        `/words/8/solutions.txt`,
       ];
 
       const [fourLetterWords, fiveLetterWords, sixLetterWords, sevenLetterWords, eightLetterWords] = await Promise.all(

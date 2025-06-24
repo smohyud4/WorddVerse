@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useWordLists } from '../../context/WordListContext';
-import { loadStats, initStats, updateStats } from '../../utils/storage';
+import { loadGuessesForLength, loadStats, initStats, updateStats } from '../../utils/storage';
 import KeyBoard from '../KeyBoard/KeyBoard';
 import NewGame from '../NewGame/NewGame';
 import Row from '../Row/Row';
@@ -24,6 +24,7 @@ export default function Game() {
     five: '',
     six: ''
   });
+  const [validGuesses, setValidGuesses] = useState(null);
   const [word, setWord] = useState('');
   const [guess, setGuess] = useState(0);
   const [gameOver, setGameOver] = useState(true);
@@ -116,7 +117,7 @@ export default function Game() {
     return wordLists[length][randomIndex];
   }
 
-  function resetGame() {
+  async function resetGame() {
     setWords({
       one: '',
       two: '',
@@ -144,6 +145,8 @@ export default function Game() {
     chars.forEach((span) => {
       span.className = '';
     });
+
+    setValidGuesses(await loadGuessesForLength(length.current));
   }
 
 
@@ -260,9 +263,9 @@ export default function Game() {
     }
 
     if (checkWord.current) {
-      !wordLists[length.current].includes(words[map[guess]].toLowerCase()) 
-        ? alert('Not in word list')
-        : setGuess(prev => prev+1) 
+      validGuesses.has(words[map[guess]].toLowerCase())
+        ? setGuess(prev => prev+1)
+        : alert('Not a valid guess');
     }
     else {
       setGuess(prev => prev+1);

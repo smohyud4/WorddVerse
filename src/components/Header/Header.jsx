@@ -39,7 +39,7 @@ export default function Header() {
   return <>
     <nav>
       <div className='primary-links'>
-        <a href="/"><img id='logo' src='output-onlinepngtools.png'/></a> 
+        <a href="/"><img id='logo' src='output-onlinepngtools.png' alt='logo'/></a> 
         <a id='trial' href="/time-trial">Trial</a>
       </div>
        

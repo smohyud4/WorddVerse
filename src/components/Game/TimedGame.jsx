@@ -4,6 +4,7 @@ import KeyBoard from '../KeyBoard/KeyBoard';
 import NewTimeGame from '../NewGame/NewTimeGame';
 import Row from '../Row/Row';
 import Header from '../Header/Header';
+import { loadGuessesForLength } from '../../utils/storage';
 
 const map = ['one', 'two', 'three', 'four', 'five', 'six'];
 
@@ -24,6 +25,7 @@ export default function Game() {
     five: '',
     six: ''
   });
+  const [validGuesses, setValidGuesses] = useState(null);
   const [word, setWord] = useState('');
   const [guess, setGuess] = useState(0);
   const [gameOver, setGameOver] = useState(true);
@@ -33,7 +35,6 @@ export default function Game() {
 
   const id = useRef(null);
   const LIMIT = useRef(720);
-  const checkWord = useRef(false);
   const length = useRef(4);
   const colors = useRef([]);
   const allColors = useRef([]);
@@ -158,7 +159,7 @@ export default function Game() {
     return wordLists[length][randomIndex];
   }
 
-  function reset(round) {
+  async function reset(round) {
     setWords({
       one: '',
       two: '',
@@ -202,6 +203,8 @@ export default function Game() {
     chars.forEach((span) => {
       span.className = '';
     });
+
+    setValidGuesses(await loadGuessesForLength(length.current));
   }
 
   function checkGuess() {
@@ -317,14 +320,9 @@ export default function Game() {
       return;
     }
 
-    if (checkWord.current) {
-      !wordLists[length.current].includes(words[map[guess]].toLowerCase()) 
-        ? alert('Not in word list')
-        : setGuess(prev => prev+1) 
-    }
-    else {
-      setGuess(prev => prev+1);
-    }
+    !validGuesses.has(words[map[guess]].toLowerCase()) 
+      ? alert('Not a valid guess')
+      : setGuess(prev => prev+1);
   } 
 
   if (!wordLists) return <p>Loading words...</p>;
