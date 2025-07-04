@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useWordLists } from '../../context/WordListContext';
+import { useToast } from '../../hooks/toast';
 import { loadGuessesForLength, loadStats, initStats, updateStats } from '../../utils/storage';
 import KeyBoard from '../KeyBoard/KeyBoard';
 import NewGame from '../NewGame/NewGame';
@@ -38,6 +39,7 @@ export default function Game() {
   const colors = useRef([]);
   const inputRef = useRef(null);
   const gameOverRef = useRef(true); // Needed to prevent extra guesses
+  const { toast, toastRef, setToast } = useToast(guess, length.current);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -258,14 +260,14 @@ export default function Game() {
   function takeGuess() {
     if (gameOverRef.current) return;
     if (words[map[guess]].length != length.current) {
-      alert('Not enough letters');
+      setToast('Not enough letters');
       return;
     }
 
     if (checkWord.current) {
       validGuesses.has(words[map[guess]].toLowerCase())
         ? setGuess(prev => prev+1)
-        : alert('Not a valid guess');
+        : setToast('Not a valid guess');
     }
     else {
       setGuess(prev => prev+1);
@@ -303,6 +305,7 @@ export default function Game() {
         value={words[map[guess]]}
         onChange={handleInput}
         placeholder='Enter your guess'
+        autoComplete="off"
         onKeyUp={(event) => {
           if (event.key === "Enter") takeGuess();
         }}
@@ -313,6 +316,7 @@ export default function Game() {
         handleDelete={handleDelete}
       />
     </main>
+    <div className="toast" ref={toastRef}>{toast}</div>
     {gameOver && (
       <NewGame 
         message={winnerMessage}

@@ -58,7 +58,7 @@ capacity
 casualty
 catching
 category
-Catholic
+catholic
 cautious
 cellular
 ceremony

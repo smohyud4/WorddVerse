@@ -7,6 +7,31 @@
     justify-content: center;
 }
 
+.toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--bg-color);
+    background-color: var(--placeholder-color);
+    padding: 6px;
+    border-radius: 6px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.toast.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.toast:empty {
+  background-color: transparent;
+}
+
 .container {
     display: grid;
     place-items: center;
@@ -74,6 +99,16 @@
     background-color: var(--correct-color);
     color: white;
     animation: pop 0.5s ease-in-out;
+}
+
+.invalid {
+    animation: flash-red  1s ease-in-out;
+}
+
+@keyframes flash-red {
+  0%   { color: rgba(255, 0, 0, 0.86); }
+  50%  { color: transparent; }
+  100% { color: rgba(255, 0, 0, 0.86); }
 }
 
 @keyframes pop {
