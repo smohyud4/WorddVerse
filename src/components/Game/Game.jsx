@@ -34,7 +34,7 @@ export default function Game() {
   const DELAY = (-10*(word.length-4) + 250);
 
   const id = useRef(null);
-  const checkWord = useRef(false);
+  const checkWord = useRef(true);
   const length = useRef(5);
   const colors = useRef([]);
   const inputRef = useRef(null);
