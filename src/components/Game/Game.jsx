@@ -42,24 +42,29 @@ export default function Game() {
   const { toast, toastRef, setToast } = useToast(guess, length.current);
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
+    async function initChallengeGame() {
+      const urlParams = new URLSearchParams(window.location.search);
 
-    if (validateLink(urlParams)) {
-      const word = atob(urlParams.get('word'));
-      if (word.length >= 4 && word.length <= 8) {
-        setWord(word);
-        length.current = word.length;
-        setGameOver(false);
-        gameOverRef.current = false;
+      if (validateLink(urlParams)) {
+        const word = atob(urlParams.get('word'));
+        if (word.length >= 4 && word.length <= 8) {
+          setWord(word);
+          length.current = word.length;
+          setValidGuesses(await loadGuessesForLength(length.current));
+          setGameOver(false);
+          gameOverRef.current = false;
+        }
+        id.current = urlParams.get('id');
+        if (id.current == 'C') checkWord.current = false;
+
+        urlParams.delete('word');
+        urlParams.delete('id');
+        const newUrl = `${window.location.origin}${window.location.pathname}`;
+        window.history.replaceState({}, '', newUrl);
       }
-      id.current = urlParams.get('id');
-
-      urlParams.delete('word');
-      urlParams.delete('id');
-      const newUrl = `${window.location.origin}${window.location.pathname}`;
-      window.history.replaceState({}, '', newUrl);
     }
 
+    initChallengeGame();
     initStats();
   }, []);
 

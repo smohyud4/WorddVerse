@@ -46,41 +46,46 @@ export default function Game() {
   const { toast, toastRef, setToast } = useToast(guess, length.current);
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
+    async function initChallengeGame() {
+      const urlParams = new URLSearchParams(window.location.search);
 
-    if (validateLink(urlParams)) {
-      for (let i=1; i <= 5; i++) {
-        const word = atob(urlParams.get(`word${i}`));
-        if (word.length != i+3) {
-          reset(false);
-          return;
+      if (validateLink(urlParams)) {
+        for (let i=1; i <= 5; i++) {
+          const word = atob(urlParams.get(`word${i}`));
+          if (word.length != i+3) {
+            reset(false);
+            return;
+          }
+          else {
+            roundWords.current.push(word);
+          }
         }
-        else {
-          roundWords.current.push(word);
+
+        id.current = urlParams.get('id');
+        let difficulty = id.current[1];
+        if (difficulty == 'H') {
+          LIMIT.current = 360;
+          setTime(360);
         }
+
+        length.current = 4;
+        setValidGuesses(await loadGuessesForLength(length.current));
+        setWord(roundWords.current[0]);
+        setGameOver(false);
+        gameOverRef.current = false;
+
+        urlParams.delete('word1');
+        urlParams.delete('word2');
+        urlParams.delete('word3');
+        urlParams.delete('word4');
+        urlParams.delete('word5');
+        urlParams.delete('id');
+        const newUrl = `${window.location.origin}${window.location.pathname}`;
+        window.history.replaceState({}, '', newUrl);
       }
-
-      id.current = urlParams.get('id');
-      let difficulty = id.current[1];
-      if (difficulty == 'H') {
-        LIMIT.current = 360;
-        setTime(360);
-      }
-
-      length.current = 4;
-      setWord(roundWords.current[0]);
-      setGameOver(false);
-      gameOverRef.current = false;
-
-      urlParams.delete('word1');
-      urlParams.delete('word2');
-      urlParams.delete('word3');
-      urlParams.delete('word4');
-      urlParams.delete('word5');
-      urlParams.delete('id');
-      const newUrl = `${window.location.origin}${window.location.pathname}`;
-      window.history.replaceState({}, '', newUrl);
     }
+  
+    initChallengeGame();
   }, []);
 
   useEffect(() => {
