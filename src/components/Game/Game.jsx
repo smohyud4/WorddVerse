@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useWordLists } from '../../context/WordListContext';
 import { useToast } from '../../hooks/toast';
-import { loadGuessesForLength, loadStats, initStats, updateStats } from '../../utils/storage';
+import { loadGuessesForLength, hasGuess, loadStats, initStats, updateStats } from '../../utils/storage';
 import KeyBoard from '../KeyBoard/KeyBoard';
 import NewGame from '../NewGame/NewGame';
 import Row from '../Row/Row';
@@ -270,7 +270,7 @@ export default function Game() {
     }
 
     if (checkWord.current) {
-      validGuesses.has(words[map[guess]].toLowerCase())
+      hasGuess(validGuesses, words[map[guess]].toLowerCase())
         ? setGuess(prev => prev+1)
         : setToast('Not a valid guess');
     }

@@ -5,10 +5,27 @@ export async function loadGuessesForLength(length) {
     const res = await fetch(`/words/${length}/guesses.txt`);
     const text = await res.text();
     const words = text.split('\n').map(word => word.trim());
-    guessesCache[length] = new Set(words); 
+    guessesCache[length] = words;
   }
 
   return guessesCache[length];
+}
+
+export function hasGuess(guesses, guess) {
+  let l = 0, r = guesses.length-1;
+
+  while (l <= r) {
+    let mid = Math.floor((l+r) / 2);
+    if (guesses[mid] == guess) return true;
+
+    if (guesses[mid] > guess) {
+      r = mid - 1;
+    } else {
+      l = mid + 1;
+    }
+  }
+
+  return false;
 }
 
 export function saveStats(stats) {

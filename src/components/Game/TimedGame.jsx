@@ -5,7 +5,7 @@ import KeyBoard from '../KeyBoard/KeyBoard';
 import NewTimeGame from '../NewGame/NewTimeGame';
 import Row from '../Row/Row';
 import Header from '../Header/Header';
-import { loadGuessesForLength } from '../../utils/storage';
+import { loadGuessesForLength, hasGuess } from '../../utils/storage';
 
 const map = ['one', 'two', 'three', 'four', 'five', 'six'];
 
@@ -327,9 +327,9 @@ export default function Game() {
       return;
     }
 
-    !validGuesses.has(words[map[guess]].toLowerCase()) 
-      ? setToast('Not a valid guess')
-      : setGuess(prev => prev+1);
+    hasGuess(validGuesses, words[map[guess]].toLowerCase())
+      ? setGuess(prev => prev+1)
+      : setToast('Not a valid guess');
   } 
 
   if (!wordLists) return <p>Loading words...</p>;

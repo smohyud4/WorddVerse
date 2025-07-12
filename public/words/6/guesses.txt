@@ -129,6 +129,7 @@ adjoin
 adjure
 adjust
 admass
+admins
 admire
 admits
 admixt
@@ -1415,6 +1416,7 @@ blokes
 blonde
 blonds
 bloods
+bloody
 blooey
 blooie
 blooms
@@ -4455,6 +4457,7 @@ escarp
 escars
 eschar
 eschew
+escort
 escots
 escrow
 escudo
@@ -4822,6 +4825,7 @@ fichus
 ficins
 fickle
 fickly
+ficlet
 ficoes
 fiddle
 fiddly
@@ -6113,6 +6117,7 @@ happed
 happen
 hapten
 haptic
+harald
 harass
 harbor
 harden
@@ -12168,6 +12173,7 @@ sextan
 sextet
 sexton
 sextos
+sexual
 shabby
 shacko
 shacks
@@ -12682,6 +12688,7 @@ snarks
 snarky
 snarls
 snarly
+snatch
 snathe
 snaths
 snawed
@@ -13324,6 +13331,7 @@ subway
 succah
 succor
 sucked
+sucker
 suckle
 sucres
 sudary
@@ -15755,14 +15763,3 @@ zygoma
 zygose
 zygote
 zymase
-bloody
-pharma
-sexual
-escort
-snatch
-sucker
-harald
-ficlet
-admins
-irates
-shelfs

@@ -18,7 +18,7 @@ export function useToast(guess, length) {
     const timeout = setTimeout(() => {
       toastEl.classList.remove("show");
       for (let i = 0; i < length; i++) {
-        const charTag = document.getElementById(`${guess + 1}${i}`);
+        const charTag = document.getElementById(`${guess+1}${i}`);
         charTag.classList.remove("invalid");
       }
       
