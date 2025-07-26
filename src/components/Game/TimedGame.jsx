@@ -158,7 +158,7 @@ export default function Game() {
   function formatTime(time) {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    return `${String(minutes).padStart(1, "0")}:${String(seconds).padStart(2, "0")}`;
   }
 
   function generateWord(length) {
