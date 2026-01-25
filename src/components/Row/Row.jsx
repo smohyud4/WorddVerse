@@ -12,7 +12,7 @@ export default function Row({word, guess, length}) {
     if (length == 8 || length == 9) {
       return {
         width: '97%',
-        gap: '2%'
+        gap: length == 8 ? '2%' : '1%'
       };
     }
 
