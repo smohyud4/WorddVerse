@@ -332,7 +332,6 @@ hepatitis
 probation
 prototype
 deception
-organiser
 fireplace
 proximity
 recipient
@@ -538,14 +537,12 @@ adulthood
 cartridge
 pesticide
 endurance
-equaliser
 sweetness
 sincerity
 polythene
 admiralty
 blindness
 causation
-childcare
 sharpness
 brickwork
 contender
@@ -645,7 +642,6 @@ parenting
 sacrament
 eagerness
 boulevard
-shareware
 obscenity
 grievance
 timescale
@@ -668,7 +664,6 @@ guildhall
 semblance
 freshness
 cardboard
-playgroup
 playhouse
 paralysis
 moderator
@@ -694,7 +689,6 @@ anthology
 courtroom
 psychosis
 partridge
-robemaker
 stalemate
 cameraman
 biologist
@@ -758,7 +752,6 @@ profusion
 firelight
 primitive
 raspberry
-hypertext
 geologist
 immediacy
 eucharist
@@ -820,7 +813,6 @@ influenza
 gatehouse
 ecosystem
 consonant
-cellulite
 adoration
 touchline
 accessory
@@ -885,8 +877,6 @@ subsystem
 patrician
 headstock
 shoemaker
-paintwork
-punchcard
 countdown
 freestyle
 bishopric
@@ -943,7 +933,6 @@ surcharge
 mistletoe
 deuterium
 microfilm
-backbench
 aggressor
 hardboard
 dispenser
@@ -952,7 +941,6 @@ reticence
 crossover
 photocopy
 unreality
-shortlist
 rootstock
 rightness
 signifier
@@ -971,7 +959,6 @@ auxiliary
 excrement
 increment
 whitewash
-workgroup
 damnation
 parentage
 bannister

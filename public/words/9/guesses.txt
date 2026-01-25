@@ -8353,6 +8353,7 @@ caxtonian
 cayubaban
 cazenovia
 ceanothus
+ceasefire
 ceaseless
 ceausescu
 cebollite
@@ -43666,6 +43667,7 @@ scorching
 scorebook
 scorecard
 scoreless
+scoreline
 scorepads
 scorified
 scorifier
