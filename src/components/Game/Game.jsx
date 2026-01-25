@@ -121,7 +121,6 @@ export default function Game() {
 
   function generateWord(length) {
     const randomIndex = Math.floor(Math.random() * wordLists[length].length);
-    console.log(wordLists[length][randomIndex]);
     return wordLists[length][randomIndex];
   }
 
