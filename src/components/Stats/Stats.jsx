@@ -15,10 +15,10 @@ export default function Stats() {
 
   function changeLength(forward) {
     if (forward) {
-      setIndex((index + 1) % 5);
+      setIndex((index + 1) % 6);
       return;
     }
-    setIndex(index == 0 ? 4 : index - 1);
+    setIndex(index == 0 ? 5 : index - 1);
   }
 
   if (!stats) {

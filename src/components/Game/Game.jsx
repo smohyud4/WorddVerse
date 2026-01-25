@@ -47,7 +47,7 @@ export default function Game() {
 
       if (validateLink(urlParams)) {
         const word = atob(urlParams.get('word'));
-        if (word.length >= 4 && word.length <= 8) {
+        if (word.length >= 4 && word.length <= 9) {
           setWord(word);
           length.current = word.length;
           setValidGuesses(await loadGuessesForLength(length.current));
@@ -121,6 +121,7 @@ export default function Game() {
 
   function generateWord(length) {
     const randomIndex = Math.floor(Math.random() * wordLists[length].length);
+    console.log(wordLists[length][randomIndex]);
     return wordLists[length][randomIndex];
   }
 
