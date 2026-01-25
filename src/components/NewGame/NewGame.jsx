@@ -6,7 +6,7 @@ import { IoIosStats } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
 import './NewGame.css'
 
-const wordLengths = [4, 5, 6, 7, 8];
+const wordLengths = [4, 5, 6, 7, 8, 9];
 const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const guessMap = {
   'blank': '⬜', 

@@ -25,13 +25,14 @@ export function WordListProvider({ children }) {
         `/words/6/solutions.txt`,
         `/words/7/solutions.txt`,
         `/words/8/solutions.txt`,
+        `/words/9/solutions.txt`,
       ];
 
-      const [fourLetterWords, fiveLetterWords, sixLetterWords, sevenLetterWords, eightLetterWords] = await Promise.all(
+      const [fourLetterWords, fiveLetterWords, sixLetterWords, sevenLetterWords, eightLetterWords, nineLetterWords] = await Promise.all(
         paths.map(loadWordList)
       );
 
-      //console.log(fourLetterWords.length, fiveLetterWords.length, sixLetterWords.length, sevenLetterWords.length, eightLetterWords.length);
+      //console.log(fourLetterWords.length, fiveLetterWords.length, sixLetterWords.length, sevenLetterWords.length, eightLetterWords.length, nineLetterWords.length);
 
       setWordLists({
         4: fourLetterWords,
@@ -39,6 +40,7 @@ export function WordListProvider({ children }) {
         6: sixLetterWords,
         7: sevenLetterWords,
         8: eightLetterWords,
+        9: nineLetterWords,
       });
     }
 

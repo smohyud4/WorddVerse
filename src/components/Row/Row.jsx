@@ -9,7 +9,7 @@ export default function Row({word, guess, length}) {
       };
     }
 
-    if (length == 8) {
+    if (length == 8 || length == 9) {
       return {
         width: '97%',
         gap: '2%'
@@ -24,6 +24,7 @@ export default function Row({word, guess, length}) {
   function calculateSpanStyles(length) {
     const spanWidth = `${100/length}%`;
     if (length == 8) return { width: '10%'};
+    if (length == 9) return { width: '9%'};
     return { width: spanWidth };
   }
     
