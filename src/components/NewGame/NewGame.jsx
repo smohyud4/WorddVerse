@@ -1,26 +1,17 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
-import {share} from '../../utils/share';
+import { loadStats } from '../../utils/storage';
+import { share, generateGameId } from '../../utils/share';
 import { IoShareSocialOutline } from "react-icons/io5";
-import { IoIosStats } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
 import './NewGame.css'
 
 const wordLengths = [4, 5, 6, 7, 8, 9];
-const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const guessMap = {
   'blank': '⬜', 
   'wrong-position': '🟨', 
   'correct': '🟩'
 };
-
-function generateGameId(length) {
-  const s1 = Math.floor(Math.random()*letters.length);
-  const s2 = Math.floor(Math.random()*letters.length);
-  const s3 = Math.floor(Math.random()*letters.length);
-
-  return `${length}${letters[s1]}${letters[s2]}${letters[s3]}`;
-}
 
 export default function NewGame({
   message, 
@@ -33,6 +24,7 @@ export default function NewGame({
   reset
 }) {
  
+  const [stats] = useState(loadStats()[length.current - 4] || null);
   const [lengthState, setLengthState] = useState(length.current);
   const [validateState, setValidateState] = useState(checkWord.current);
 
@@ -80,20 +72,18 @@ export default function NewGame({
   }
 
   function handleShare(challenge) {
-
     let result = generateResult(colors, time);
-    let shareURL;
+
     if (challenge) {
       const id = generateGameId(length.current);
-      shareURL = `${window.location.origin}?word=${btoa(word)}&id=${id}`;
+      const shareURL = `${window.location.origin}?word=${btoa(word)}&id=${id}`;
       result = `WorddVerse #${id}\n${result}\nBeat that!`;
-    }
-    else {
-      shareURL = `${window.location.origin}`;
-      result = `WorddVerse #${gameId}\n${result}\n${word}`;
+      share(result, shareURL);
+      return;
     }
 
-    share(result, shareURL);
+    result = `WorddVerse #${gameId}\n${result}\n\n${word}`;
+    share(result);
   }
 
   return (
@@ -115,7 +105,8 @@ export default function NewGame({
             </h1>
             <div className="results">
               <h2>Time: {time}</h2>
-              <h2><a href='/stats'><IoIosStats/></a></h2>
+              <h2>Streak: {stats.streak}</h2>
+              <h2>Max Streak: {stats.bestStreak}</h2>
             </div>
             <div 
               className="colorGrid" 

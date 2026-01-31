@@ -4,27 +4,29 @@ export function share(result, URL) {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   if (isMobile && navigator.share) {
+    const shareData = {
+      title: `WorddVerse`,
+      text: result,
+    };
+    if (URL) shareData.url = URL;
+    
     navigator
-      .share({
-        title: `WorddVerse`,
-        text: result,
-        url: URL,
-      })
+      .share(shareData)
       .then(() => console.log('Shared successfully'))
       .catch(() => console.log('Failed to share'));
   } 
   else {
-    console.log(URL);
-    navigator.clipboard.writeText(`${result}\n${URL}`)
+    const textToShare = URL ? `${result}\n${URL}` : result;
+    navigator.clipboard.writeText(textToShare)
       .then(() => alert('Results copied to clipboard!'))
       .catch(() => alert('Failed to copy results.'));
   }
 }
 
-export function generateGameId(length) {
+export function generateGameId(prefix) {
   const s1 = Math.floor(Math.random()*letters.length);
   const s2 = Math.floor(Math.random()*letters.length);
   const s3 = Math.floor(Math.random()*letters.length);
 
-  return `${length}${letters[s1]}${letters[s2]}${letters[s3]}`;
+  return `${prefix}${letters[s1]}${letters[s2]}${letters[s3]}`;
 }

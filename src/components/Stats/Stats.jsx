@@ -23,8 +23,10 @@ export default function Stats() {
 
   if (!stats) {
     return <>
-     <Header title="WorddVerse" setDisplay={() => {}}/>
-     <p>Finish a game to see your stats</p>
+     <Header/>
+     <div className="nostats-container">
+      <p>Finish a game to see your stats</p>
+     </div>
     </>
   }
 
@@ -35,10 +37,10 @@ export default function Stats() {
         <div className="game-stats">
           <Graph stats={stats[index]} length={index+4}/>
         </div>
-      </section>
-      <section className="stat-controls">
-        <button onClick={() => changeLength(false)}>&laquo;</button>
-        <button onClick={() => changeLength(true)}>&raquo;</button>
+        <section className="stat-controls">
+          <button onClick={() => changeLength(false)}>&laquo;</button>
+          <button onClick={() => changeLength(true)}>&raquo;</button>
+        </section>
       </section>
     </main>
   </>

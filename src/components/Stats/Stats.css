@@ -14,12 +14,21 @@
     text-decoration: underline;
 }
 
+.nostats-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: calc(95vh - var(--nav-height));
+}
+
 .stats-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
-    margin-top: 5vh;
+    height: calc(95vh - var(--nav-height));
 }
 
 .stats-container .game-stats {

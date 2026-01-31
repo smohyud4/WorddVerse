@@ -15,7 +15,7 @@ export default function Graph({stats, length}) {
   }
 
   if (stats.games == 0) {
-    return <p>Finish a game to view your stats for {length} letter words</p>;
+    return <p>Finish a game to view your stats for <span className="stat">{length}</span> letter words</p>
   }
 
   return <>

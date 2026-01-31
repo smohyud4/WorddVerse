@@ -49,26 +49,26 @@ export default function NewGame({
   }
 
   function handleShare(challenge) {
-
     let result = generateResult(colors, times);
-    let shareURL;
+    
     if (challenge) {
       const id = generateGameId(`T${limit.current == 720 ? 'E' : 'H'}`);
-      shareURL = `${window.location.href}?`;
+      let shareURL = `${window.location.href}?`;
+
       for (let i=0; i < words.length; i++) {
         const word = words[i];
         shareURL += `&word${i+1}=${btoa(word)}`;
       }
+      
       shareURL += `&id=${id}`;
       result = `Time Trial #${id}\n${result}\nBeat that!`;
+      share(result, shareURL);
+      return;
     }
-    else {
-      shareURL = `${window.location.href}`;
-      result = `Time Trial #${gameId}\n${result}\n`
-      words.forEach(word => result += `${word} `);
-    }
-
-    share(result, shareURL);
+  
+    result = `Time Trial #${gameId}\n${result}\n\n`
+    words.forEach(word => result += `${word} `);
+    share(result);
   }
 
   function handleEasy() {

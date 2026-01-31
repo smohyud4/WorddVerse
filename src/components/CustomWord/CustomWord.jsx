@@ -10,7 +10,7 @@ export default function CustomWord({setDis}) {
 
   function handleChange(event) {
     const {name, value} = event.target;
-    if (name == "word" && (!/^[A-Za-z]+$/.test(value) || value.length < 4 || value.length > 8)) {
+    if (name == "word" && (!/^[A-Za-z]+$/.test(value) || value.length < 4 || value.length > 9)) {
       setInvalid(true);
       return;
     }
@@ -55,7 +55,7 @@ export default function CustomWord({setDis}) {
               </button>
             )}
           </div>
-          {invalid && <p>Must be a 4-8 letter word</p>}
+          {invalid && <p>Must be a 4-9 letter word</p>}
         </div>
       </div>
     </div>

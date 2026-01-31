@@ -10,7 +10,7 @@
     gap: 2px;
 }
 
-.time-stats .stat {
+.stats-container .stat {
     font-size: 1rem;
     font-weight: 600;
 }
@@ -28,7 +28,7 @@
     height: fit-content;
     padding: 10px;
     background-color: var(--modal-bg-color);
-    border: 1px solid #ddd;
+    border: 1px solid #888;
     border-radius: 8px;
 }
 
