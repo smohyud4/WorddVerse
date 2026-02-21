@@ -93,6 +93,10 @@ export default function NewGame({
     share(result);
   }
 
+  if (!stats) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div role="dialog" className="modal">
       <div 
