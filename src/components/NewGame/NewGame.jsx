@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { loadStats } from '../../utils/storage';
 import { share, generateGameId } from '../../utils/share';
 import { IoShareSocialOutline } from "react-icons/io5";
@@ -24,9 +24,16 @@ export default function NewGame({
   reset
 }) {
  
-  const [stats] = useState(loadStats()[length.current - 4] || null);
+  const [stats, setStats] = useState(null);
   const [lengthState, setLengthState] = useState(length.current);
   const [validateState, setValidateState] = useState(checkWord.current);
+
+  useEffect(() => {
+    if (!length) return;
+
+    const allStats = loadStats();
+    setStats(allStats[length.current - 4]);
+  }, [length]);
 
   function getModalAnimation(message) {
     if (message === "WorddVerse") {
