@@ -4,27 +4,27 @@ import { useToast } from '../../hooks/toast';
 import KeyBoard from '../KeyBoard/KeyBoard';
 import NewTimeGame from '../NewGame/NewTimeGame';
 import Row from '../Row/Row';
-import Header from '../Header/Header';
 import { loadGuessesForLength, hasGuess } from '../../utils/storage';
 
-const map = ['one', 'two', 'three', 'four', 'five', 'six'];
-
 function validateLink(params) {
-  return params.has('word1') && params.has('word2') 
+  return params.size === 6 && params.has('word1') && params.has('word2') 
   && params.has('word3') && params.has('word4') 
   && params.has('word5') && params.has('id');
 }
+
+const urlParams = new URLSearchParams(window.location.search);
+const isChallengeGame = validateLink(urlParams);
 
 export default function Game() {
   
   const wordLists = useWordLists();
   const [words, setWords] = useState({
-    one: '',
-    two: '',
-    three: '',
-    four: '',
-    five: '',
-    six: ''
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: ''
   });
   const [validGuesses, setValidGuesses] = useState(null);
   const [word, setWord] = useState('');
@@ -32,6 +32,7 @@ export default function Game() {
   const [gameOver, setGameOver] = useState(true);
   const [winnerMessage, setWinnerMessage] = useState("Time Trial");
   const [time, setTime] = useState(720);
+  const [challengeGame, setChallengeGame] = useState(isChallengeGame);
   const DELAY = (-10*(word.length-4) + 250);
 
   const id = useRef(null);
@@ -46,46 +47,46 @@ export default function Game() {
   const { toast, toastRef, setToast } = useToast(guess, length.current);
 
   useEffect(() => {
-    async function initChallengeGame() {
-      const urlParams = new URLSearchParams(window.location.search);
+    async function initChallengeGame(urlParams) {
 
-      if (validateLink(urlParams)) {
-        for (let i=1; i <= 5; i++) {
-          const word = atob(urlParams.get(`word${i}`));
-          if (word.length != i+3) {
-            reset(false);
-            return;
-          }
-          else {
-            roundWords.current.push(word);
-          }
+      for (let i=1; i <= 5; i++) {
+        const word = atob(urlParams.get(`word${i}`));
+        if (word.length != i+3) {
+          reset(false);
+          return;
         }
-
-        id.current = urlParams.get('id');
-        let difficulty = id.current[1];
-        if (difficulty == 'H') {
-          LIMIT.current = 360;
-          setTime(360);
+        else {
+          roundWords.current.push(word);
         }
-
-        length.current = 4;
-        setValidGuesses(await loadGuessesForLength(length.current));
-        setWord(roundWords.current[0]);
-        setGameOver(false);
-        gameOverRef.current = false;
-
-        urlParams.delete('word1');
-        urlParams.delete('word2');
-        urlParams.delete('word3');
-        urlParams.delete('word4');
-        urlParams.delete('word5');
-        urlParams.delete('id');
-        const newUrl = `${window.location.origin}${window.location.pathname}`;
-        window.history.replaceState({}, '', newUrl);
       }
+
+      id.current = urlParams.get('id');
+      let difficulty = id.current[1];
+      if (difficulty == 'H') {
+        LIMIT.current = 360;
+        setTime(360);
+      }
+
+      length.current = 4;
+      setValidGuesses(await loadGuessesForLength(length.current));
+      setWord(roundWords.current[0]);
+      setGameOver(false);
+      setChallengeGame(false);
+      gameOverRef.current = false;
+
+      urlParams.delete('word1');
+      urlParams.delete('word2');
+      urlParams.delete('word3');
+      urlParams.delete('word4');
+      urlParams.delete('word5');
+      urlParams.delete('id');
+      const newUrl = `${window.location.origin}${window.location.pathname}`;
+      window.history.replaceState({}, '', newUrl);
     }
   
-    initChallengeGame();
+    if (challengeGame) {
+      initChallengeGame(urlParams);
+    }
   }, []);
 
   useEffect(() => {
@@ -168,12 +169,12 @@ export default function Game() {
 
   async function reset(round) {
     setWords({
-      one: '',
-      two: '',
-      three: '',
-      four: '',
-      five: '',
-      six: ''
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+      5: '',
+      6: ''
     });
 
     if (!round) {
@@ -229,7 +230,7 @@ export default function Game() {
       fixedFreq[char] = (fixedFreq[char] || 0) + 1;
       exactMatches[char] = 0;
     }
-    for (const char of words[map[guess-1]]) {
+    for (const char of words[guess]) {
       keyColors[char] = '';
     }
 
@@ -240,7 +241,7 @@ export default function Game() {
     */
 
     for (let i=0; i < length.current; i++) {
-      const char = words[map[guess-1]][i].toLowerCase();
+      const char = words[guess][i].toLowerCase();
 
       if (char === word[i]) {
         charColors[i] = "correct";
@@ -277,7 +278,7 @@ export default function Game() {
 
     for (let i=0; i < length.current; i++) {
       setTimeout(() => {
-        const char = words[map[guess-1]][i];
+        const char = words[guess][i];
         const keyTag = document.getElementById(char);
         const charTag = document.getElementById(`${guess}${i}`);
 
@@ -292,11 +293,11 @@ export default function Game() {
   }
 
   function handleClick(char) {
-    if (words[map[guess]].length >= length.current) return; // Prevent adding more than 5 characters
+    if (words[guess+1].length >= length.current) return; // Prevent adding more than 5 characters
 
     setWords((prevWords) => {
       const newWords = { ...prevWords }; // Create a shallow copy of the state
-      newWords[map[guess]] += char; // Append the key to the current word
+      newWords[guess+1] += char; // Append the key to the current word
       return newWords;
     });
   }
@@ -304,7 +305,7 @@ export default function Game() {
   function handleDelete() {
     setWords((prevWords) => {
       const newWords = { ...prevWords }; 
-      newWords[map[guess]] = newWords[map[guess]].slice(0, -1); // Remove the last character
+      newWords[guess+1] = newWords[guess+1].slice(0, -1); // Remove the last character
       return newWords;
     });
   }
@@ -322,26 +323,39 @@ export default function Game() {
 
   function takeGuess() {
     if (gameOverRef.current) return;
-    if (words[map[guess]].length != length.current) {
+    if (words[guess+1].length != length.current) {
       setToast('Not enough letters');
       return;
     }
 
-    hasGuess(validGuesses, words[map[guess]].toLowerCase())
+    hasGuess(validGuesses, words[guess+1].toLowerCase())
       ? setGuess(prev => prev+1)
       : setToast('Not a valid guess');
   } 
 
-  if (!wordLists) return <p>Loading words...</p>;
+  if (!wordLists) {
+    return (
+      <div className="challenge-loading">
+        <p>Loading words...</p>
+     </div>
+    )
+  }
+
+  if (challengeGame) {
+    return (
+      <div className="challenge-loading">
+        <p>Starting the game...</p>
+     </div>
+    )
+  }
 
   return <>
-    <Header/>
     <p id="time">{formatTime(time)}</p>
     <main className="container">
       {Array.from({ length: 6 }).map((_, index) => (
         <Row 
           key={index} 
-          word={words[map[index]]} 
+          word={words[index+1]} 
           guess={index+1}
           length={length}
         />
@@ -351,8 +365,8 @@ export default function Game() {
         id='guessInput' 
         type='text' 
         maxLength={length.current}
-        name={map[guess]}
-        value={words[map[guess]]}
+        name={String(guess+1)}
+        value={words[guess+1]}
         onChange={handleInput}
         placeholder='Enter your guess'
         autoComplete="off"

@@ -2,11 +2,13 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Game from './components/Game/Game';
 import TimedGame from './components/Game/TimedGame';
 import Stats from './components/Stats/Stats';
+import Header from './components/Header/Header';
 import './App.css'
 
 function App() {
   return (
     <>
+      <Header />
       <Router>
         <Routes>
           <Route path="/" element={<Game/>} />

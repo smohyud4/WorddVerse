@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { loadStats } from '../../utils/storage';
-import Header from '../Header/Header';
 import Graph from '../Graph/Graph';
 import './Stats.css'
 
@@ -23,7 +22,6 @@ export default function Stats() {
 
   if (!stats) {
     return <>
-     <Header/>
      <div className="nostats-container">
       <p>Finish a game to see your stats</p>
      </div>
@@ -31,7 +29,6 @@ export default function Stats() {
   }
 
   return <> 
-    <Header/>
     <main>
       <section className="stats-container">
         <div className="game-stats">

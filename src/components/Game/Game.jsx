@@ -5,25 +5,25 @@ import { loadGuessesForLength, hasGuess, loadStats, initStats, updateStats } fro
 import KeyBoard from '../KeyBoard/KeyBoard';
 import NewGame from '../NewGame/NewGame';
 import Row from '../Row/Row';
-import Header from '../Header/Header';
 import './Game.css';
 
-const map = ['one', 'two', 'three', 'four', 'five', 'six'];
-
 function validateLink(params) {
-  return params.has('word') && params.has('id');
+  return params.size === 2 && params.has('word') && params.has('id');
 }
+
+const urlParams = new URLSearchParams(window.location.search);
+const isChallengeGame = validateLink(urlParams);
 
 export default function Game() {
   
   const wordLists = useWordLists();
   const [words, setWords] = useState({
-    one: '',
-    two: '',
-    three: '',
-    four: '',
-    five: '',
-    six: ''
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: ''
   });
   const [validGuesses, setValidGuesses] = useState(null);
   const [word, setWord] = useState('');
@@ -31,6 +31,7 @@ export default function Game() {
   const [gameOver, setGameOver] = useState(true);
   const [winnerMessage, setWinnerMessage] = useState("WorddVerse");
   const [time, setTime] = useState(0);
+  const [challengeGame, setChallengeGame] = useState(isChallengeGame);
   const DELAY = (-10*(word.length-4) + 250);
 
   const id = useRef(null);
@@ -42,30 +43,32 @@ export default function Game() {
   const { toast, toastRef, setToast } = useToast(guess, length.current);
 
   useEffect(() => {
-    async function initChallengeGame() {
-      const urlParams = new URLSearchParams(window.location.search);
+    async function initChallengeGame(urlParams) {
+      const word = atob(urlParams.get('word'));
 
-      if (validateLink(urlParams)) {
-        const word = atob(urlParams.get('word'));
-        if (word.length >= 4 && word.length <= 9) {
-          setWord(word);
-          length.current = word.length;
-          setValidGuesses(await loadGuessesForLength(length.current));
-          setGameOver(false);
-          gameOverRef.current = false;
-        }
-        id.current = urlParams.get('id');
-        if (id.current == 'C') checkWord.current = false;
-
-        urlParams.delete('word');
-        urlParams.delete('id');
-        const newUrl = `${window.location.origin}${window.location.pathname}`;
-        window.history.replaceState({}, '', newUrl);
+      if (word.length >= 4 && word.length <= 9) {
+        setWord(word);
+        length.current = word.length;
+        setValidGuesses(await loadGuessesForLength(length.current));
+        setGameOver(false);
+        gameOverRef.current = false;
       }
+
+      setChallengeGame(false);
+      id.current = urlParams.get('id');
+      if (id.current == 'C') checkWord.current = false;
+
+      urlParams.delete('word');
+      urlParams.delete('id');
+      const newUrl = `${window.location.origin}${window.location.pathname}`;
+      window.history.replaceState({}, '', newUrl);
     }
 
-    initChallengeGame();
     initStats();
+
+    if (challengeGame) {
+      initChallengeGame(urlParams);
+    }
   }, []);
 
   useEffect(() => {
@@ -126,12 +129,12 @@ export default function Game() {
 
   async function resetGame() {
     setWords({
-      one: '',
-      two: '',
-      three: '',
-      four: '',
-      five: '',
-      six: ''
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+      5: '',
+      6: ''
     });
 
     setGameOver(false);
@@ -171,7 +174,7 @@ export default function Game() {
       fixedFreq[char] = (fixedFreq[char] || 0) + 1;
       exactMatches[char] = 0;
     }
-    for (const char of words[map[guess-1]]) {
+    for (const char of words[guess]) {
       keyColors[char] = '';
     }
 
@@ -182,7 +185,7 @@ export default function Game() {
     */
 
     for (let i=0; i < length.current; i++) {
-      const char = words[map[guess-1]][i].toLowerCase();
+      const char = words[guess][i].toLowerCase();
 
       if (char === word[i]) {
         charColors[i] = "correct";
@@ -219,7 +222,7 @@ export default function Game() {
 
     for (let i=0; i < length.current; i++) {
       setTimeout(() => {
-        const char = words[map[guess-1]][i];
+        const char = words[guess][i];
         const keyTag = document.getElementById(char);
         const charTag = document.getElementById(`${guess}${i}`);
 
@@ -234,11 +237,11 @@ export default function Game() {
   }
 
   function handleClick(char) {
-    if (words[map[guess]].length >= length.current) return; // Prevent adding more than 5 characters
+    if (words[guess+1].length >= length.current) return; // Prevent adding more than 5 characters
 
     setWords((prevWords) => {
       const newWords = { ...prevWords }; // Create a shallow copy of the state
-      newWords[map[guess]] += char; // Append the key to the current word
+      newWords[guess+1] += char; // Append the key to the current word
       return newWords;
     });
   }
@@ -246,7 +249,7 @@ export default function Game() {
   function handleDelete() {
     setWords((prevWords) => {
       const newWords = { ...prevWords }; 
-      newWords[map[guess]] = newWords[map[guess]].slice(0, -1); // Remove the last character
+      newWords[guess+1] = newWords[guess+1].slice(0, -1); // Remove the last character
       return newWords;
     });
   }
@@ -264,13 +267,13 @@ export default function Game() {
 
   function takeGuess() {
     if (gameOverRef.current) return;
-    if (words[map[guess]].length != length.current) {
+    if (words[guess+1].length != length.current) {
       setToast('Not enough letters');
       return;
     }
 
     if (checkWord.current) {
-      hasGuess(validGuesses, words[map[guess]].toLowerCase())
+      hasGuess(validGuesses, words[guess+1].toLowerCase())
         ? setGuess(prev => prev+1)
         : setToast('Not a valid guess');
     }
@@ -289,14 +292,21 @@ export default function Game() {
     setGuess(prev => prev+1);
   }*/
 
+  if (challengeGame) {
+    return (
+      <div className="challenge-loading">
+        <p>Starting the game...</p>
+     </div>
+    )
+  }
+
   return <>
-    <Header/>
     <p id="time">{formatTime()}</p>
     <main className="container">
       {Array.from({ length: 6 }).map((_, index) => (
         <Row 
           key={index} 
-          word={words[map[index]]} 
+          word={words[index+1]} 
           guess={index+1}
           length={length}
         />
@@ -306,8 +316,8 @@ export default function Game() {
         id='guessInput' 
         type='text' 
         maxLength={length.current}
-        name={map[guess]}
-        value={words[map[guess]]}
+        name={String(guess+1)}
+        value={words[guess+1]}
         onChange={handleInput}
         placeholder='Enter your guess'
         autoComplete="off"

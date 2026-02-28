@@ -52,6 +52,14 @@
     text-align: center;
 }
 
+.challenge-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: calc(95vh - var(--nav-height));
+}
+
 #guessInput  {
   width: 200px; 
   border: 1px solid transparent; 
