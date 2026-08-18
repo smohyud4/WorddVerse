@@ -9907,6 +9907,7 @@ peyote
 peyotl
 phages
 phalli
+pharma
 pharos
 phased
 phases
