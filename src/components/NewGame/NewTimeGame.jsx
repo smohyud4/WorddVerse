@@ -84,7 +84,7 @@ export default function NewGame({
   }
 
   return (
-    <div role="dialog" className="modal">
+    <div role="dialog" aria-labelledby="msg" aria-modal="true" className="modal">
       <div 
         className="modal-content"
         style={getModalAnimation(message)}

@@ -331,7 +331,7 @@ export default function Game() {
         handleDelete={handleDelete}
       />
     </main>
-    <div className="toast" ref={toastRef}>{toast}</div>
+    <div className="toast" ref={toastRef} aria-live="assertive" >{toast}</div>
     {gameOver && (
       <NewGame 
         message={winnerMessage}

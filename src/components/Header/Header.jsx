@@ -39,21 +39,57 @@ export default function Header() {
   return <>
     <nav>
       <div className='primary-links'>
-        <a href="/"><img id='logo' src='output-onlinepngtools.png' alt='logo'/></a> 
-        <a id='trial' href="/time-trial">Trial</a>
+        <a href="/" aria-label="Play base 4 - 9 letter gamemode"><img id='logo' src='output-onlinepngtools.png' alt='logo'/></a> 
+        <a id='trial' aria-label="Play Time Trial gamemode" href="/time-trial">Trial</a>
       </div>
        
       <div className='secondary-links'>
-        <div className='icon-container' onClick={() => setColorModal(true)}>
+        <div
+          className='icon-container'
+          role="button"
+          tabIndex={0}
+          aria-label="Open color palette"
+          onClick={() => setColorModal(true)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setColorModal(true);
+            }
+          }}
+        >
           <IoMdColorPalette/>
         </div>
         <div className='icon-container'>
-          <a href='/stats'><IoIosStats/></a>
+          <a href='/stats' aria-label="Visit your statistics page"><IoIosStats/></a>
         </div>
-        <div className='icon-container' onClick={() => toggleTheme()}>
+        <div
+          className='icon-container'
+          role="button"
+          tabIndex={0}
+          aria-label={`Toggle ${theme === 'light' ? 'dark' : 'light'} mode`}
+          onClick={() => toggleTheme()}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              toggleTheme();
+            }
+          }}
+        >
           <MdOutlineDarkMode/>
         </div>
-        <div className='icon-container' onClick={() => setCustomWordModal(true)}>
+        <div
+          className='icon-container'
+          role="button"
+          tabIndex={0}
+          aria-label="Create custom word game"
+          onClick={() => setCustomWordModal(true)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setCustomWordModal(true);
+            }
+          }}
+        >
           <FcPlus/>
         </div>
       </div>
