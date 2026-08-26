@@ -22,7 +22,7 @@ export default function Row({word, guess, length}) {
   }
       
   function calculateSpanStyles(length) {
-    const spanWidth = `${100/length}%`;
+    const spanWidth = window.innerWidth > 600 ? '45px' : `${100/length}%`;
     if (length == 8) return { width: '10%'};
     if (length == 9) return { width: '9%'};
     return { width: spanWidth };

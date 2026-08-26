@@ -46,7 +46,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; 
+    gap: 8px; 
     height: auto;
     font-weight: bold;
     text-align: center;
@@ -79,9 +79,9 @@
 .grid-item span {
     display: grid;
     place-items: center;
-    height: 50px;
+    height: 45px;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 1.75rem;
     border: 1px solid #a8a6a6;
 } 
 
