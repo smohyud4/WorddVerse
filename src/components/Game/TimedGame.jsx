@@ -290,7 +290,7 @@ export default function Game() {
     }
 
     colors.current.push(charColors);
-    setAccessibilityText(getAccessibilityText(charColors));
+    setAccessibilityText(getAccessibilityText(charColors, words[guess]));
     return winner;
   }
 

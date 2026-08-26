@@ -11,7 +11,7 @@ export async function loadGuessesForLength(length) {
   return guessesCache[length];
 }
 
-export function getAccessibilityText(charColors) {
+export function getAccessibilityText(charColors, guess) {
   const positionWords = [
     'first',
     'second',
@@ -32,7 +32,7 @@ export function getAccessibilityText(charColors) {
 
   const labels = [];
   charColors.forEach((result, index) => {
-    let label = `${positionWords[index]} letter ${colorMap[result]}`
+    let label = `${positionWords[index]} letter ${guess[index]} ${colorMap[result]}`
     labels.push(label);
   })
   return labels.join(', ');
