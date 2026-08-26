@@ -300,9 +300,9 @@ export default function Game() {
     )
   }
 
-  return <>
-    <p id="time">{formatTime()}</p>
-    <main className="container">
+  return <main id="main">
+    <div className="container">
+      <p id="time">{formatTime()}</p>
       {Array.from({ length: 6 }).map((_, index) => (
         <Row 
           key={index} 
@@ -330,7 +330,7 @@ export default function Game() {
         handleEnter={takeGuess}
         handleDelete={handleDelete}
       />
-    </main>
+    </div>
     <div className="toast" ref={toastRef} aria-live="assertive" >{toast}</div>
     {gameOver && (
       <NewGame 
@@ -344,5 +344,5 @@ export default function Game() {
         reset={resetGame}
       />
     )}
-    </>
+  </main>
 };
