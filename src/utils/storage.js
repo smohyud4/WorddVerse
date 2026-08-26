@@ -11,6 +11,33 @@ export async function loadGuessesForLength(length) {
   return guessesCache[length];
 }
 
+export function getAccessibilityText(charColors) {
+  const positionWords = [
+    'first',
+    'second',
+    'third',
+    'fourth',
+    'fifth',
+    'sixth',
+    'seventh',
+    'eighth',
+    'ninth'
+  ];
+
+  const colorMap = {
+    'correct': 'correct',
+    'wrong-position': 'present in another position',
+    'blank': 'absent'
+  }
+
+  const labels = [];
+  charColors.forEach((result, index) => {
+    let label = `${positionWords[index]} letter ${colorMap[result]}`
+    labels.push(label);
+  })
+  return labels.join(', ');
+}
+
 export function hasGuess(guesses, guess) {
   let l = 0, r = guesses.length-1;
 

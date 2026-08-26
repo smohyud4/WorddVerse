@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useWordLists } from '../../context/WordListContext';
 import { useToast } from '../../hooks/toast';
-import { loadGuessesForLength, hasGuess, loadStats, initStats, updateStats } from '../../utils/storage';
+import { loadGuessesForLength, hasGuess, getAccessibilityText, loadStats, initStats, updateStats } from '../../utils/storage';
 import KeyBoard from '../KeyBoard/KeyBoard';
 import NewGame from '../NewGame/NewGame';
 import Row from '../Row/Row';
@@ -32,6 +32,7 @@ export default function Game() {
   const [winnerMessage, setWinnerMessage] = useState("WorddVerse");
   const [time, setTime] = useState(0);
   const [challengeGame, setChallengeGame] = useState(isChallengeGame);
+  const [accessibilityText, setAccessibilityText] = useState('');
   const DELAY = (-10*(word.length-4) + 250);
 
   const id = useRef(null);
@@ -233,6 +234,7 @@ export default function Game() {
     }
 
     colors.current.push(charColors);
+    setAccessibilityText(getAccessibilityText(charColors));
     return winner;
   }
 
@@ -272,14 +274,12 @@ export default function Game() {
       return;
     }
 
-    if (checkWord.current) {
-      hasGuess(validGuesses, words[guess+1].toLowerCase())
-        ? setGuess(prev => prev+1)
-        : setToast('Not a valid guess');
+    if (checkWord.current && !hasGuess(validGuesses, words[guess+1].toLowerCase())) {
+      setToast('Not a valid guess');
+      return;
     }
-    else {
-      setGuess(prev => prev+1);
-    }
+
+    setGuess(prev => prev+1)
   } 
 
   /*function randomGuess() {
@@ -332,6 +332,7 @@ export default function Game() {
       />
     </div>
     <div className="toast" ref={toastRef} aria-live="assertive" >{toast}</div>
+    <div className="accessibility" aria-live="polite" aria-atomic="true">{accessibilityText}</div>
     {gameOver && (
       <NewGame 
         message={winnerMessage}

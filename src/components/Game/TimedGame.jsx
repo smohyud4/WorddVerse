@@ -4,7 +4,7 @@ import { useToast } from '../../hooks/toast';
 import KeyBoard from '../KeyBoard/KeyBoard';
 import NewTimeGame from '../NewGame/NewTimeGame';
 import Row from '../Row/Row';
-import { loadGuessesForLength, hasGuess } from '../../utils/storage';
+import { loadGuessesForLength, hasGuess, getAccessibilityText } from '../../utils/storage';
 
 function validateLink(params) {
   return params.size === 6 && params.has('word1') && params.has('word2') 
@@ -33,6 +33,7 @@ export default function Game() {
   const [winnerMessage, setWinnerMessage] = useState("Time Trial");
   const [time, setTime] = useState(720);
   const [challengeGame, setChallengeGame] = useState(isChallengeGame);
+  const [accessibilityText, setAccessibilityText] = useState('');
   const DELAY = (-10*(word.length-4) + 250);
 
   const id = useRef(null);
@@ -289,6 +290,7 @@ export default function Game() {
     }
 
     colors.current.push(charColors);
+    setAccessibilityText(getAccessibilityText(charColors));
     return winner;
   }
 
@@ -328,9 +330,12 @@ export default function Game() {
       return;
     }
 
-    hasGuess(validGuesses, words[guess+1].toLowerCase())
-      ? setGuess(prev => prev+1)
-      : setToast('Not a valid guess');
+    if (!hasGuess(validGuesses, words[guess+1].toLowerCase())) {
+      setToast('Not a valid guess');
+      return;
+    }
+  
+    setGuess(prev => prev+1)
   } 
 
   if (!wordLists) {
@@ -381,6 +386,7 @@ export default function Game() {
       />
     </div>
     <div className="toast" ref={toastRef} aria-live="assertive">{toast}</div>
+    <div className="accessibility" aria-live="polite" aria-atomic="true">{accessibilityText}</div>
     {gameOver && (
       <NewTimeGame 
         message={winnerMessage}
