@@ -32,7 +32,7 @@ export default function NewGame({
     if (!length) return;
 
     const allStats = loadStats();
-    setStats(allStats[length.current - 4] ?? null);
+    if (allStats) setStats(allStats[length.current - 4]);
   }, [length]);
 
   function getModalAnimation(message) {
