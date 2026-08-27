@@ -15,7 +15,6 @@ const urlParams = new URLSearchParams(window.location.search);
 const isChallengeGame = validateLink(urlParams);
 
 export default function Game() {
-  
   const wordLists = useWordLists();
   const [words, setWords] = useState({
     1: '',
