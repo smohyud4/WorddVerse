@@ -32,7 +32,7 @@ export default function NewGame({
     if (!length) return;
 
     const allStats = loadStats();
-    setStats(allStats[length.current - 4]);
+    setStats(allStats[length.current - 4] ?? null);
   }, [length]);
 
   function getModalAnimation(message) {
@@ -116,8 +116,8 @@ export default function NewGame({
             </h1>
             <div className="results">
               <h2>Time: {time}</h2>
-              <h2>Streak: {stats.streak}</h2>
-              <h2>Max Streak: {stats.bestStreak}</h2>
+              <h2>Streak: {stats.streak ?? 0}</h2>
+              <h2>Max Streak: {stats.bestStreak ?? 0}</h2>
             </div>
             <div 
               className="colorGrid" 
