@@ -93,7 +93,7 @@ export default function NewGame({
     share(result);
   }
 
-  if (!stats) {
+  if (!stats && message !== "WorddVerse") {
     return <p>Loading...</p>;
   }
 
@@ -116,8 +116,8 @@ export default function NewGame({
             </h1>
             <div className="results">
               <h2>Time: {time}</h2>
-              <h2>Streak: {stats.streak ?? 0}</h2>
-              <h2>Max Streak: {stats.bestStreak ?? 0}</h2>
+              <h2>Streak: {stats?.streak ?? 0}</h2>
+              <h2>Max Streak: {stats?.bestStreak ?? 0}</h2>
             </div>
             <div 
               className="colorGrid" 
